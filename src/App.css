@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+button {
+  margin:10px  10px 10px 10px  !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +39,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.MuiDialog-paper{
+  min-width: 400px;
 }

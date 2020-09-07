@@ -1,0 +1,56 @@
+{
+    "title": "",
+    "description": "",
+    "type": "object",
+    "required": [
+        "fieldType",
+        "title",
+        "id"
+    ],
+    "properties": {
+        "fieldType": {
+            "type": "string",
+            "title": "Tipo de campo",
+            "enum": [
+                "Entrada de texto",
+                "Selector",
+                "CheckBox",
+                "Archivo",
+                "Fecha"
+            ]
+        },
+        "title": {
+            "type": "string",
+            "title": "Título del campo"
+        },
+        "id": {
+            "type": "string",
+            "title": "Id del campo"
+        }
+    },
+
+    "dependencies": {
+        "fieldType": {
+            "properties": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "fieldType": {
+                                "enum": [
+                                    "Selector"
+                                ]
+                            },
+                            "options": {
+                                "type": "array",
+                                "title": "Opciones dentro de tu selector",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
