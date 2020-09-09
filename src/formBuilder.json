@@ -28,10 +28,8 @@
             "title": "Id del campo"
         }
     },
-
     "dependencies": {
         "fieldType": {
-            "properties": {
                 "oneOf": [
                     {
                         "properties": {
@@ -50,7 +48,7 @@
                         }
                     }
                 ]
-            }
+            
         }
     }
 }
