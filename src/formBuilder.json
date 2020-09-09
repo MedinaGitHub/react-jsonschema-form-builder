@@ -26,6 +26,11 @@
         "id": {
             "type": "string",
             "title": "Id del campo"
+        },
+        "required":{
+            "type": "boolean",
+            "title": "¿Es un campo obligatorio?",
+            "default": false
         }
     },
     "dependencies": {
@@ -40,7 +45,7 @@
                             },
                             "options": {
                                 "type": "array",
-                                "title": "Opciones dentro de tu selector",
+                                "title": "Campos de tu selector",
                                 "items": {
                                     "type": "string"
                                 }

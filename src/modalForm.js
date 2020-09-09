@@ -66,6 +66,8 @@ export default function CustomizedDialogs(getNewProperties) {
         const newProp = { jsonSchema: {}, uiSchema: {} };
         newProp.jsonSchema.title = formData.title;
         newProp.jsonSchema.id = formData.id;
+
+        console.log('formData',formData)
         
         if(formData.required){
             newProp.jsonSchema.isRequired = formData.required;
@@ -76,6 +78,7 @@ export default function CustomizedDialogs(getNewProperties) {
                 break;
             case "Selector":
                 newProp.jsonSchema.type = "string";
+                newProp.jsonSchema.enum = formData.options;
                 newProp.uiSchema[formData.id] = { "ui:widget": "select" }
                 break;
             case "CheckBox":
