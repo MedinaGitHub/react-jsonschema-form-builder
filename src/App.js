@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import modalForm from './modalForm';
+import modalForm from './ModalForm';
+import ModalOrder from './ModalOrder';
 import seedSchema from './seedSchema.json';
 import Form from '@rjsf/material-ui';
 import { makeStyles } from '@material-ui/core/styles';
@@ -78,8 +79,8 @@ function App() {
           <Grid justify="center" direction="row" item lg={12} >
             <Paper className={classes.paper}>
               {modalForm(getNewProperties)}
-              <Button variant="contained" color="primary"> Ordenar o Eliminar  </Button >
-              <Button variant="contained" color="primary"> Guardar  </Button >
+              {ModalOrder(jsonSchema)}
+             <Button variant="contained" color="primary"> Guardar  </Button >
             </Paper>
 
           </Grid>

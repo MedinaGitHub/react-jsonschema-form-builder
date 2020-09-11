@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
@@ -44,14 +43,8 @@ const DialogContent = withStyles((theme) => ({
     },
 }))(MuiDialogContent);
 
-const DialogActions = withStyles((theme) => ({
-    root: {
-        margin: 0,
-        padding: theme.spacing(1),
-    },
-}))(MuiDialogActions);
 
-export default function CustomizedDialogs(getNewProperties) {
+export default function ModalForm(getNewProperties) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -67,9 +60,9 @@ export default function CustomizedDialogs(getNewProperties) {
         newProp.jsonSchema.title = formData.title;
         newProp.jsonSchema.id = formData.id;
 
-        console.log('formData',formData)
-        
-        if(formData.required){
+        console.log('formData', formData)
+
+        if (formData.required) {
             newProp.jsonSchema.isRequired = formData.required;
         }
         switch (formData.fieldType) {
@@ -107,11 +100,11 @@ export default function CustomizedDialogs(getNewProperties) {
         <div style={{ display: 'contents' }}>
             <Button variant="contained" color="primary" onClick={handleClickOpen}>
                 Agregar Campo
-      </Button>
+            </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Nuevo Campo
-        </DialogTitle>
+               </DialogTitle>
                 <DialogContent dividers>
 
                     <Form schema={formBuilder} onSubmit={onSubmit} />
