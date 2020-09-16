@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -44,8 +44,9 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 
-export default function ModalForm(getNewProperties) {
+export default function ModalForm(getNewProperties, prefix = "") {
     const [open, setOpen] = React.useState(false);
+    const [formData, setFormData] = useState({});
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -57,10 +58,13 @@ export default function ModalForm(getNewProperties) {
 
     const onSubmit = ({ formData }, e) => {
         const newProp = { jsonSchema: {}, uiSchema: {} };
-        newProp.jsonSchema.title = formData.title;
-        newProp.jsonSchema.id = formData.id;
 
-        console.log('formData', formData)
+        newProp.jsonSchema.title = formData.title;
+        if (formData.check_id == true) {
+            newProp.jsonSchema.id =  prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
+        } else {
+            newProp.jsonSchema.id = formData.id;
+        }
 
         if (formData.required) {
             newProp.jsonSchema.isRequired = formData.required;
@@ -106,7 +110,7 @@ export default function ModalForm(getNewProperties) {
                     Nuevo Campo
                </DialogTitle>
                 <DialogContent dividers>
-                    <Form schema={formBuilder} onSubmit={onSubmit}  />
+                    <Form formData={formData} schema={formBuilder} onSubmit={onSubmit} />
                 </DialogContent>
             </Dialog>
         </div>

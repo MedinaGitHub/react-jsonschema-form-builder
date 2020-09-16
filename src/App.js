@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function App({ getJsonSchemaForm, seedSchema }) {
+function App({ getJsonSchemaForm, seedSchema , prefix }) {
 
   const validateParams = (getJsonSchemaForm, seedSchema) => {
     if (typeof getJsonSchemaForm !== 'function') {
@@ -29,9 +29,13 @@ function App({ getJsonSchemaForm, seedSchema }) {
     if (typeof seedSchema !== 'object') {
       seedSchema = defaultSeed;
     }
+
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
   }
 
-  validateParams(getJsonSchemaForm, seedSchema);
+  validateParams(getJsonSchemaForm, seedSchema, prefix);
 
   const classes = useStyles();
   const [jsonSchema, setJsonSchema] = useState(seedSchema);
@@ -88,23 +92,16 @@ function App({ getJsonSchemaForm, seedSchema }) {
     validateUiSchema(item);
   }
 
-  useEffect(() => {
-    console.log(jsonSchema)
-  }, [jsonSchema]);
-
-
   return (
-
-
     < div className={classes.root} >
       <Grid container direction="row"
         justify="center"
         alignItems="center" spacing={3}>
-        <Grid item xs={6}  >
+        <Grid item xs={5}  >
           <Paper className={classes.paper}>
-            {modalForm(getNewProperties)}
+            {modalForm(getNewProperties, prefix)}
             {ModalOrder(jsonSchema, uiSchemaSetOrder)}
-            <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> Exportar  </Button >
+            <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> Guardar  </Button >
           </Paper>
         </Grid>
       </Grid>
@@ -121,61 +118,9 @@ function App({ getJsonSchemaForm, seedSchema }) {
             </Form>
           </Paper>
         </Grid>
-
-        <Grid item xs={5}>
-          <Paper className={classes.paper}>xs</Paper>
-        </Grid>
       </Grid>
     </div >
-
-
   );
 }
 
 export default App;
-
-/*
-      <div className={classes.root}>
-      <Grid
-        style={{ height: '100vh' }}
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-
-        <Grid justify="center" item lg={12} >
-          <Grid justify="center" direction="row" item lg={12} >
-            <Paper className={classes.paper}>
-              {modalForm(getNewProperties)}
-              {ModalOrder(jsonSchema, uiSchemaSetOrder)}
-              <Button onClick={() => getJsonSchemaForm({jsonSchema,uiSchema})} variant="contained" color="primary"> Exportar  </Button >
-            </Paper>
-
-          </Grid>
-
-          <Grid justify="center" item lg={12} >
-            <Paper className={classes.paper}>
-              <Form schema={jsonSchema}
-                uiSchema={uiSchema} >
-                <div>
-                  <button type="submit" style={{display:"none"}}>Submit</button>
-                </div>
-              </Form>
-            </Paper>
-            <Paper className={classes.paper}>
-              <Form schema={jsonSchema}
-                uiSchema={uiSchema} >
-                <div>
-                  <button type="submit" style={{display:"none"}}>Submit</button>
-                </div>
-              </Form>
-            </Paper>
-          </Grid>
-
-        </Grid>
-
-      </Grid>
-
-    </div >
-    */

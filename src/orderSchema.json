@@ -1,6 +1,6 @@
 {
     "type": "array",
-      "description": "Utilice las flechas para mover el orden de los campos o el guión para eliminar un campo ",
+      "description": " ",
       "items": {
         "type": "string"
       }

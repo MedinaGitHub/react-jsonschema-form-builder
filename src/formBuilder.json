@@ -4,8 +4,7 @@
     "type": "object",
     "required": [
         "fieldType",
-        "title",
-        "id"
+        "title"
     ],
     "properties": {
         "fieldType": {
@@ -23,11 +22,16 @@
             "type": "string",
             "title": "Título del campo"
         },
-        "id": {
-            "type": "string",
-            "title": "Id del campo"
+        "check_id": {
+            "title": "ID automático",
+            "type": "boolean",
+            "default": true,
+            "enum": [
+                true,
+                false
+            ]
         },
-        "required":{
+        "required": {
             "type": "boolean",
             "title": "¿Es un campo obligatorio?",
             "default": false
@@ -35,25 +39,44 @@
     },
     "dependencies": {
         "fieldType": {
-                "oneOf": [
-                    {
-                        "properties": {
-                            "fieldType": {
-                                "enum": [
-                                    "Selector"
-                                ]
-                            },
-                            "options": {
-                                "type": "array",
-                                "title": "Campos de tu selector",
-                                "items": {
-                                    "type": "string"
-                                }
+            "oneOf": [
+                {
+                    "properties": {
+                        "fieldType": {
+                            "enum": [
+                                "Selector"
+                            ]
+                        },
+                        "options": {
+                            "type": "array",
+                            "title": "Campos de tu selector",
+                            "items": {
+                                "type": "string"
                             }
                         }
                     }
-                ]
-            
+                }
+            ]
+        },
+        "check_id": {
+            "oneOf": [
+                {
+                    "properties": {
+                        "check_id": {
+                            "enum": [
+                                false
+                            ]
+                        },
+                        "id": {
+                            "type": "string",
+                            "title": "Id del campo"
+                        }
+                    },
+                    "required": [
+                        "id"
+                      ]
+                }
+            ]
         }
     }
 }

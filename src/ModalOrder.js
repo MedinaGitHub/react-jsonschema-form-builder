@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Form from '@rjsf/material-ui';
 import PT from 'prop-types';
@@ -49,7 +49,6 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
 
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState(null);
-    let form = useRef(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -85,8 +84,9 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
     const onSubmit = () => {
 
 
-        console.log('formData',formData)
+        console.log('formData', formData)
         uiSchemaSetOrder(formData);
+
         handleClose();
 
     }
@@ -99,12 +99,12 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
         </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} onEntered={desabledInputs} >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Ordenar o Eliminar un campo
-           </DialogTitle>
-                <DialogContent dividers>
+                    <div style={{ 'margin-top': '10px' }}>Ordenar o eliminar un campo según id.</div>
+                </DialogTitle>
+                <DialogContent>
                     {formData &&
                         <div id="orderForm">
-                            <Form schema={orderSchema} onSubmit={onSubmit} formData={formData}   onChange={e => setFormData(e.formData)}/>
+                            <Form schema={orderSchema} onSubmit={onSubmit} formData={formData} onChange={e => setFormData(e.formData)} />
                         </div>}
                 </DialogContent>
             </Dialog>

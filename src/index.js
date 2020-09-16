@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import seedSchema from './seedSchema.json';
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +8,8 @@ ReactDOM.render(
   <React.StrictMode>
     <App
       getJsonSchemaForm={(item) => { console.log('el response', item) }}
-      seedSchema={seedSchema} />
+      seedSchema={seedSchema}
+      prefix={'formulario_'} />
   </React.StrictMode>,
   document.getElementById('root')
 );
