@@ -45,10 +45,10 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 
-const ModalOrder = (listPropForm) => {
+const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
 
     const [open, setOpen] = React.useState(false);
-    const [formData, setShemaFormData] = useState(null);
+    const [formData, setFormData] = useState(null);
     let form = useRef(null);
 
     const handleClickOpen = () => {
@@ -57,7 +57,6 @@ const ModalOrder = (listPropForm) => {
     const handleClose = () => {
         setOpen(false);
     };
-
 
     const desabledInputs = () => {
         try {
@@ -78,12 +77,17 @@ const ModalOrder = (listPropForm) => {
             for (const prop in listPropForm.properties) {
                 justNames.push(listPropForm.properties[prop].id)
             }
-            setShemaFormData(justNames)
+            setFormData(justNames)
 
         }
     }, [listPropForm]);
 
     const onSubmit = () => {
+
+
+        console.log('formData',formData)
+        uiSchemaSetOrder(formData);
+        handleClose();
 
     }
 
@@ -100,7 +104,7 @@ const ModalOrder = (listPropForm) => {
                 <DialogContent dividers>
                     {formData &&
                         <div id="orderForm">
-                            <Form schema={orderSchema} onSubmit={onSubmit} formData={formData} />
+                            <Form schema={orderSchema} onSubmit={onSubmit} formData={formData}   onChange={e => setFormData(e.formData)}/>
                         </div>}
                 </DialogContent>
             </Dialog>

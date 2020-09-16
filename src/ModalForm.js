@@ -106,9 +106,7 @@ export default function ModalForm(getNewProperties) {
                     Nuevo Campo
                </DialogTitle>
                 <DialogContent dividers>
-
-                    <Form schema={formBuilder} onSubmit={onSubmit} />
-
+                    <Form schema={formBuilder} onSubmit={onSubmit}  />
                 </DialogContent>
             </Dialog>
         </div>

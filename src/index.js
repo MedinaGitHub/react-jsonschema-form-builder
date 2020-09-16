@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import seedSchema from './seedSchema.json';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App
+      getJsonSchemaForm={(item) => { console.log('el response', item) }}
+      seedSchema={seedSchema} />
   </React.StrictMode>,
   document.getElementById('root')
 );
