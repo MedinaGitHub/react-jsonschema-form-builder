@@ -9,7 +9,7 @@ It's a visual builder of "Json Schema" that export the "Json Schema" generated f
 
 # Demo
 
-[Demo]https://codesandbox.io/s/silent-wood-jihjk?file=/src/index.js:293-323)
+[Demo](https://codesandbox.io/s/silent-wood-jihjk?file=/src/index.js:293-323)
 
 ## How does it work?
 
