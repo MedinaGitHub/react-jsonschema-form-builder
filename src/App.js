@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import modalForm from './ModalForm';
 import ModalOrder from './ModalOrder';
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function App({ getJsonSchemaForm, seedSchema , prefix }) {
+function App({ getJsonSchemaForm, seedSchema, prefix }) {
 
   const validateParams = (getJsonSchemaForm, seedSchema) => {
     if (typeof getJsonSchemaForm !== 'function') {
@@ -52,10 +52,12 @@ function App({ getJsonSchemaForm, seedSchema , prefix }) {
   }
 
   const validateUiSchema = (item) => {
+    debugger
+    console.log('uiSchema', uiSchema)
     if (Object.keys(item.uiSchema).length) {
       setUiSchema((prevState) => ({
         ...prevState,
-        [item.jsonSchema.id]: item.uiSchema
+        [item.jsonSchema.id]: item.uiSchema[item.jsonSchema.id]
       }));
     }
   }

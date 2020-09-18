@@ -22,6 +22,10 @@
             "type": "string",
             "title": "Título del campo"
         },
+        "description": {
+            "type": "string",
+            "title": "Descripción del campo"
+        },
         "check_id": {
             "title": "ID automático",
             "type": "boolean",

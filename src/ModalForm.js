@@ -46,7 +46,6 @@ const DialogContent = withStyles((theme) => ({
 
 export default function ModalForm(getNewProperties, prefix = "") {
     const [open, setOpen] = React.useState(false);
-    const [formData, setFormData] = useState({});
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -60,11 +59,16 @@ export default function ModalForm(getNewProperties, prefix = "") {
         const newProp = { jsonSchema: {}, uiSchema: {} };
 
         newProp.jsonSchema.title = formData.title;
+        debugger;
+
         if (formData.check_id == true) {
-            newProp.jsonSchema.id =  prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
-        } else {
-            newProp.jsonSchema.id = formData.id;
+            formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
+        } 
+             newProp.jsonSchema.id = formData.id
+        if (typeof formData.description != 'undefined' ) {
+            newProp.uiSchema[formData.id] = { "ui:help": formData.description }
         }
+
 
         if (formData.required) {
             newProp.jsonSchema.isRequired = formData.required;
@@ -110,7 +114,7 @@ export default function ModalForm(getNewProperties, prefix = "") {
                     Nuevo Campo
                </DialogTitle>
                 <DialogContent dividers>
-                    <Form formData={formData} schema={formBuilder} onSubmit={onSubmit} />
+                    <Form schema={formBuilder} onSubmit={onSubmit} />
                 </DialogContent>
             </Dialog>
         </div>
