@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 It's a visual builder of "Json Schema" that export the "Json Schema" generated for then paste this structure of schema in your [react-jsonschema-form component](https://github.com/rjsf-team/react-jsonschema-form) 
 
+# *under contruction
+
 ## Why?
 
  Because I needed my clients to create forms visually for then i can export them to another platform whit the sintaxis from react-jsonschema-form
