@@ -4,14 +4,12 @@ It's a visual builder of "Json Schema" that export the "Json Schema" generated f
 
 ## Why?
 
- Because I needed my clients to create forms visually for then i can export them to another platform.
-
- whit the sintaxis from react-jsonschema-form
+ Because I needed my clients to create forms visually for then i can export them to another platform whit the sintaxis from react-jsonschema-form
 
 
 # Demo
 
-[Demo]]https://codesandbox.io/s/silent-wood-jihjk?file=/src/index.js:293-323)
+[Demo]https://codesandbox.io/s/silent-wood-jihjk?file=/src/index.js:293-323)
 
 ## How does it work?
 
@@ -39,7 +37,7 @@ You can do a fork and change  this package @rjsf/material-ui for others availabl
             <>
                 <FormBuilderSchema
                     seedSchema={seed} 
-                    />
+                />
             </>
         );
     }
@@ -53,7 +51,6 @@ seed.json
             "title": "Form Title",
             "description": "Subtitle",
             "type": "object",
-        
             "properties": {}
         }
 ```
@@ -64,8 +61,8 @@ other properties
     //getJsonSchemaForm =>  callback this json schema
     //prefix =>  if you can add prefix before ID of inprus
     <FormBuilderSchema
-                    getJsonSchemaForm={getJsonSchema}
-                    seedSchema={seed} 
-                    prefix={'prefix_befores_ides_inputs'} 
-                    />
+        getJsonSchemaForm={getJsonSchema}
+        seedSchema={seed} 
+        prefix={'prefix_befores_ides_inputs'} 
+    />
 ```
