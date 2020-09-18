@@ -66,3 +66,5 @@ other properties
         prefix={'prefix_befores_ides_inputs'} 
     />
 ```
+
+[imagen](https://i.imgur.com/Pt0P07u.png)
