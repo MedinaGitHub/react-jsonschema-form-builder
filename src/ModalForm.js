@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -54,21 +54,18 @@ export default function ModalForm(getNewProperties, prefix = "") {
         setOpen(false);
     };
 
-
     const onSubmit = ({ formData }, e) => {
         const newProp = { jsonSchema: {}, uiSchema: {} };
 
         newProp.jsonSchema.title = formData.title;
-        debugger;
 
         if (formData.check_id == true) {
             formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
-        } 
-             newProp.jsonSchema.id = formData.id
-        if (typeof formData.description != 'undefined' ) {
+        }
+        newProp.jsonSchema.id = formData.id
+        if (typeof formData.description != 'undefined') {
             newProp.uiSchema[formData.id] = { "ui:help": formData.description }
         }
-
 
         if (formData.required) {
             newProp.jsonSchema.isRequired = formData.required;
@@ -80,14 +77,16 @@ export default function ModalForm(getNewProperties, prefix = "") {
             case "Selector":
                 newProp.jsonSchema.type = "string";
                 newProp.jsonSchema.enum = formData.options;
-                newProp.uiSchema[formData.id] = { "ui:widget": "select" }
+                let beforeObject = newProp.uiSchema[formData.id];
+                newProp.uiSchema[formData.id] = { ...beforeObject, ...{ "ui:widget": "select" } }
                 break;
             case "CheckBox":
                 newProp.jsonSchema.type = "boolean";
                 break;
             case "Radio buttons":
                 newProp.jsonSchema.type = "boolean";
-                newProp.uiSchema[formData.id] = { "ui:widget": "radio" }
+                let beforeObjectRadio = newProp.uiSchema[formData.id];
+                newProp.uiSchema[formData.id] = { ...beforeObjectRadio, ...{ "ui:widget": "radio" } }
                 break;
             case "Archivo":
                 newProp.jsonSchema.type = "string";

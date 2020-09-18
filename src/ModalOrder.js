@@ -61,7 +61,6 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
         try {
             var index = 0;
             for (const key in listPropForm.properties) {
-                console.log(' document.getElementById("root_" + index)', document.getElementById("root_" + index))
                 document.getElementById("root_" + index).disabled = true;
                 index++;
             }
@@ -82,13 +81,9 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
     }, [listPropForm]);
 
     const onSubmit = () => {
-
-
         console.log('formData', formData)
         uiSchemaSetOrder(formData);
-
         handleClose();
-
     }
 
     return (
