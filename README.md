@@ -67,4 +67,4 @@ other properties
     />
 ```
 
-[imagen](https://i.imgur.com/Pt0P07u.png)
+![imagen](https://i.imgur.com/Pt0P07u.png)
