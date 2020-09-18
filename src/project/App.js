@@ -6,7 +6,7 @@ import Form from '@rjsf/material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Button } from '@material-ui/core';
-import defaultSeed from "./seedSchema.json";
+import defaultSeed from "./schemasJson/seedSchema.json";
 
 const useStyles = makeStyles((theme) => ({
   root: {

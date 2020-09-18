@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Form from '@rjsf/material-ui';
-import formBuilder from './formBuilder.json';
+import formBuilder from './schemasJson/formBuilder.json';
 
 const styles = (theme) => ({
     root: {

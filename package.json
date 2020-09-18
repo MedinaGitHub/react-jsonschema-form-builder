@@ -1,7 +1,33 @@
 {
   "name": "form-builder-json-schema",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "it's a visual builder of 'Json Schema' that export the 'Json Schema' generated for then paste this structure of schema in your react-jsonschema-form component",
+  "private": false,
+  "author": "Sebastian Medina",
+  "repository": "https://github.com/MedinaGitHub/react-jsonschema-form-builder", 
+  "license": "MIT",
+  "main": "dist/App.js",
+  "module": "dist/App.js",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "babel": {
+    "presets": [
+      "@babel/react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -15,6 +41,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "publish:npm": "set NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/components --out-dir dist --copy-files",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
