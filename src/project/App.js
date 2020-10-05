@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function App({ getJsonSchemaForm, seedSchema, prefix }) {
+function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
 
-  const validateParams = (getJsonSchemaForm, seedSchema) => {
+  const validateParams = (getJsonSchemaForm, seedSchema, seedSchemaUi, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
       getJsonSchemaForm = (item) => { console.log(item) };
     }
@@ -30,16 +30,20 @@ function App({ getJsonSchemaForm, seedSchema, prefix }) {
       seedSchema = defaultSeed;
     }
 
+    if (typeof seedSchemaUi !== 'object') {
+      seedSchemaUi = {};
+    }
+
     if (typeof prefix !== 'string') {
       prefix = '';
     }
   }
 
-  validateParams(getJsonSchemaForm, seedSchema, prefix);
+  validateParams(getJsonSchemaForm, seedSchema, seedSchemaUi , prefix);
 
   const classes = useStyles();
   const [jsonSchema, setJsonSchema] = useState(seedSchema);
-  const [uiSchema, setUiSchema] = useState({});
+  const [uiSchema, setUiSchema] = useState(seedSchemaUi);
 
   const validateRequired = (item, beforeState) => {
     if (item.jsonSchema.isRequired) {

@@ -1,6 +1,6 @@
 {
   "name": "react-jsonschema-form-builder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "it's a visual builder of 'Json Schema' that export the 'Json Schema' generated for then paste this structure of schema in your react-jsonschema-form component",
   "private": false,
   "author": "Sebastian Medina",

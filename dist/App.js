@@ -52,6 +52,7 @@ function App({
       }
 
       beforeState.required.push(item.jsonSchema.id);
+      debugger;
       setJsonSchema(prevState => ({ ...prevState,
         required: beforeState.required
       }));
@@ -82,6 +83,7 @@ function App({
     difference.forEach(prop => {
       delete beforeState.properties[prop];
     });
+    debugger;
     setJsonSchema(prevState => ({ ...prevState,
       properties: beforeState.properties
     }));
@@ -99,6 +101,7 @@ function App({
     var beforeState = { ...jsonSchema
     };
     beforeState.properties[item.jsonSchema.id] = item.jsonSchema;
+    debugger;
     setJsonSchema(prevState => ({ ...prevState,
       properties: beforeState.properties
     }));
