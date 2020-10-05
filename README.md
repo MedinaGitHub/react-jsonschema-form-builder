@@ -62,9 +62,11 @@ other properties
 ```js
     //getJsonSchemaForm =>  callback this json schema
     //prefix =>  if you can add prefix before ID of inprus
+    //seedSchemaUi => UiSchema
     <FormBuilderSchema
         getJsonSchemaForm={getJsonSchema}
         seedSchema={seed} 
+        seedSchemaUi={{}}
         prefix={'prefix_befores_ides_inputs'} 
     />
 ```
