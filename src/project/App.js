@@ -51,14 +51,11 @@ function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
         beforeState.required = []
       }
       beforeState.required.push(item.jsonSchema.id)
-      debugger;
       setJsonSchema(prevState => ({ ...prevState, required: beforeState.required }));
     }
   }
 
   const validateUiSchema = (item) => {
-    debugger
-    console.log('uiSchema', uiSchema)
     if (Object.keys(item.uiSchema).length) {
       setUiSchema((prevState) => ({
         ...prevState,
@@ -79,7 +76,6 @@ function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
     difference.forEach(prop => {
       delete beforeState.properties[prop]
     });
-    debugger;
     setJsonSchema(prevState => ({ ...prevState, properties: beforeState.properties }));
   }
 
@@ -95,7 +91,6 @@ function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
   const getNewProperties = (item) => {
     var beforeState = { ...jsonSchema };
     beforeState.properties[item.jsonSchema.id] = item.jsonSchema
-    debugger;
     setJsonSchema(prevState => ({ ...prevState, properties: beforeState.properties }));
     validateRequired(item, beforeState);
     validateUiSchema(item);
