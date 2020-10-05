@@ -47,6 +47,7 @@ function App({ getJsonSchemaForm, seedSchema, prefix }) {
         beforeState.required = []
       }
       beforeState.required.push(item.jsonSchema.id)
+      debugger;
       setJsonSchema(prevState => ({ ...prevState, required: beforeState.required }));
     }
   }
@@ -74,6 +75,7 @@ function App({ getJsonSchemaForm, seedSchema, prefix }) {
     difference.forEach(prop => {
       delete beforeState.properties[prop]
     });
+    debugger;
     setJsonSchema(prevState => ({ ...prevState, properties: beforeState.properties }));
   }
 
@@ -89,6 +91,7 @@ function App({ getJsonSchemaForm, seedSchema, prefix }) {
   const getNewProperties = (item) => {
     var beforeState = { ...jsonSchema };
     beforeState.properties[item.jsonSchema.id] = item.jsonSchema
+    debugger;
     setJsonSchema(prevState => ({ ...prevState, properties: beforeState.properties }));
     validateRequired(item, beforeState);
     validateUiSchema(item);
