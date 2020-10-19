@@ -29,7 +29,7 @@ export const useJsonSchema = (seedSchema = JSON.parse(JSON.stringify(defaultSeed
 
         if (typeof newJsonSchema.required != 'undefined') {
             newJsonSchema.required = newJsonSchema.required.filter(x => !idsToDelete.includes(x))
-            if (newJsonSchema.required.length == 0) {
+            if (newJsonSchema.required.length === 0) {
                 delete newJsonSchema.required
             }
         }

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './project/App';
-import seedSchema from './project/schemasJson/seedSchema.json';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

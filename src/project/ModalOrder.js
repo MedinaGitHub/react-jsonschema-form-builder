@@ -48,7 +48,7 @@ const DialogContent = withStyles((theme) => ({
 
 const ModalOrder = ({ jsonSchema, updateUi }) => {
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const { listNameForm, transformJsonSchemaToList, newList } = useListNameForm();
 
     const handleClickOpen = () => {

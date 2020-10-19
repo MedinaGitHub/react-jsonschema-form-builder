@@ -70,7 +70,7 @@ export const handleSubmitModalForm = (formData, prefix) => {
 
     newProp.jsonSchema.title = formData.title;
 
-    if (formData.check_id == true) {
+    if (formData.check_id === true) {
         formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
         formData.id = cleanTextToEnableId(formData.id) 
     }
@@ -117,7 +117,7 @@ export const handleSubmitModalForm = (formData, prefix) => {
 }
 
 export default function ModalForm({ addItemForm, prefix = "" }) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
