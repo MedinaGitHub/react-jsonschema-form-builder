@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import orderSchema from './schemasJson/orderSchema.json';
 import Button from '@material-ui/core/Button';
+import { useListNameForm } from './useListNameForm'
 
 const styles = (theme) => ({
     root: {
@@ -45,10 +46,10 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 
-const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
+const ModalOrder = ({ jsonSchema, updateUi }) => {
 
     const [open, setOpen] = React.useState(false);
-    const [formData, setFormData] = useState(null);
+    const { listNameForm, transformJsonSchemaToList, newList } = useListNameForm();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -60,7 +61,7 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
     const desabledInputs = () => {
         try {
             var index = 0;
-            for (const key in listPropForm.properties) {
+            for (const key in jsonSchema.properties) {
                 document.getElementById("root_" + index).disabled = true;
                 index++;
             }
@@ -70,19 +71,11 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
     }
 
     useEffect(() => {
-        if (Object.keys(listPropForm.properties).length) {
-            var justNames = [];
-            for (const prop in listPropForm.properties) {
-                justNames.push(listPropForm.properties[prop].id)
-            }
-            setFormData(justNames)
-
-        }
-    }, [listPropForm]);
+        transformJsonSchemaToList(jsonSchema)
+    }, [jsonSchema]);
 
     const onSubmit = () => {
-        console.log('formData', formData)
-        uiSchemaSetOrder(formData);
+        updateUi(listNameForm);
         handleClose();
     }
 
@@ -97,9 +90,9 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
                     <div style={{ 'margin-top': '10px' }}>Ordenar o eliminar un campo según id.</div>
                 </DialogTitle>
                 <DialogContent>
-                    {formData &&
+                    {listNameForm &&
                         <div id="orderForm">
-                            <Form schema={orderSchema} onSubmit={onSubmit} formData={formData} onChange={e => setFormData(e.formData)} />
+                            <Form schema={orderSchema} onSubmit={onSubmit} formData={listNameForm} onChange={e => newList(e.formData)} />
                         </div>}
                 </DialogContent>
             </Dialog>
@@ -108,7 +101,7 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
 }
 
 ModalOrder.PT = {
-    listPropForm: PT.shape({
+    jsonSchema: PT.shape({
         properties: PT.arrayOf(PT.object)
     }),
     schemaOrder: PT.shape({

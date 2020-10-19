@@ -22,9 +22,10 @@ const useStyles = makeStyles(theme => ({
 function App({
   getJsonSchemaForm,
   seedSchema,
+  seedSchemaUi,
   prefix
 }) {
-  const validateParams = (getJsonSchemaForm, seedSchema) => {
+  const validateParams = (getJsonSchemaForm, seedSchema, seedSchemaUi, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
       getJsonSchemaForm = item => {
         console.log(item);
@@ -35,15 +36,19 @@ function App({
       seedSchema = defaultSeed;
     }
 
+    if (typeof seedSchemaUi !== 'object') {
+      seedSchemaUi = {};
+    }
+
     if (typeof prefix !== 'string') {
       prefix = '';
     }
   };
 
-  validateParams(getJsonSchemaForm, seedSchema, prefix);
+  validateParams(getJsonSchemaForm, seedSchema, seedSchemaUi, prefix);
   const classes = useStyles();
   const [jsonSchema, setJsonSchema] = useState(seedSchema);
-  const [uiSchema, setUiSchema] = useState({});
+  const [uiSchema, setUiSchema] = useState(seedSchemaUi);
 
   const validateRequired = (item, beforeState) => {
     if (item.jsonSchema.isRequired) {
@@ -52,7 +57,6 @@ function App({
       }
 
       beforeState.required.push(item.jsonSchema.id);
-      debugger;
       setJsonSchema(prevState => ({ ...prevState,
         required: beforeState.required
       }));
@@ -60,9 +64,6 @@ function App({
   };
 
   const validateUiSchema = item => {
-    debugger;
-    console.log('uiSchema', uiSchema);
-
     if (Object.keys(item.uiSchema).length) {
       setUiSchema(prevState => ({ ...prevState,
         [item.jsonSchema.id]: item.uiSchema[item.jsonSchema.id]
@@ -83,7 +84,6 @@ function App({
     difference.forEach(prop => {
       delete beforeState.properties[prop];
     });
-    debugger;
     setJsonSchema(prevState => ({ ...prevState,
       properties: beforeState.properties
     }));
@@ -101,7 +101,6 @@ function App({
     var beforeState = { ...jsonSchema
     };
     beforeState.properties[item.jsonSchema.id] = item.jsonSchema;
-    debugger;
     setJsonSchema(prevState => ({ ...prevState,
       properties: beforeState.properties
     }));

@@ -8,7 +8,6 @@ ReactDOM.render(
   <React.StrictMode>
     <App
       getJsonSchemaForm={(item) => { console.log('el response', item) }}
-      seedSchema={seedSchema}
       seedSchemaUi={{}}
       prefix={'formulario_'} />
   </React.StrictMode>,
