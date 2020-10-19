@@ -1,3 +1,5 @@
+[![Build Status][build-shield]][build-url][build-url]
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 It's a visual builder of "Json Schema" that export the "Json Schema" generated for then paste this structure of schema in your [react-jsonschema-form component](https://github.com/rjsf-team/react-jsonschema-form) 
@@ -72,3 +74,5 @@ other properties
 ```
 
 ![imagen](https://i.imgur.com/Pt0P07u.png)
+[build-shield]: https://github.com/MedinaGitHub/react-jsonschema-form-builder/workflows/React%20CI/CD/badge.svg
+[build-url]: https://github.com/MedinaGitHub/react-jsonschema-form-builder/actions
