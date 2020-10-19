@@ -1,4 +1,5 @@
-[![Build Status][build-shield]][build-url][build-url]
+![Build Status](https://github.com/MedinaGitHub/react-jsonschema-form-builder/workflows/React%20CI/CD/badge.svg)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -74,5 +75,3 @@ other properties
 ```
 
 ![imagen](https://i.imgur.com/Pt0P07u.png)
-[build-shield]: https://github.com/MedinaGitHub/react-jsonschema-form-builder/workflows/React%20CI/CD/badge.svg
-[build-url]: https://github.com/MedinaGitHub/react-jsonschema-form-builder/actions
