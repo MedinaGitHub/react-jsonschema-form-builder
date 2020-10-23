@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from '@rjsf/material-ui';
 import PT from 'prop-types';
 import orderSchema from './schemasJson/order.json';
 import { useListNameForm } from './hooks/useListNameForm'
 import WrapperModal from "./WrapperModal";
 
-const ModalSetOrder = ({ jsonSchema, updateUi }) => {
+const ModalSetOrder = ({ jsonSchema, uiSchema, updateUi }) => {
 
     const { listNameForm, transformJsonSchemaToList, newList } = useListNameForm();
+    const [close, setClose] = useState(null)
 
     const disabledInputs = () => {
         try {
@@ -22,16 +23,22 @@ const ModalSetOrder = ({ jsonSchema, updateUi }) => {
     }
 
     useEffect(() => {
-        transformJsonSchemaToList(jsonSchema)
-    }, [jsonSchema]);
+        console.log('hola',uiSchema)
+        transformJsonSchemaToList(jsonSchema, uiSchema)
+    }, [jsonSchema, uiSchema]);
 
     const onSubmit = () => {
         updateUi(listNameForm);
+        setClose(true)
+        setTimeout(() => {
+            setClose(null)
+        }, 1000);
     }
+
 
     return (
 
-        <WrapperModal txtBtn="Ordenar o Eliminar" txtTitle="Ordenar o eliminar un campo según id." onEntered={disabledInputs}>
+        <WrapperModal close={close} txtBtn="Ordenar o Eliminar" txtTitle="Ordenar o eliminar un campo según id." onEntered={disabledInputs}>
             <Form schema={orderSchema} onSubmit={onSubmit} formData={listNameForm} onChange={e => newList(e.formData)} />
         </WrapperModal>
     )

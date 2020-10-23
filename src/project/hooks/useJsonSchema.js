@@ -8,15 +8,15 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
 
         if (item.sections && item.sections !== "root") {
             if (newJsonSchema.properties[item.sections].items) {
-               // newJsonSchema.properties[item.sections].items[item.id] = item
-               if(!newJsonSchema.definitions){
-                   newJsonSchema.definitions = {}
-                   newJsonSchema.properties[item.sections].items = { "$ref": `#/definitions/${item.sections}`}
-               }
-              if(!newJsonSchema.definitions[item.sections]){
-                newJsonSchema.definitions[item.sections] = {  type: "object", properties : {} }
-              }
-               newJsonSchema.definitions[item.sections].properties[item.id] = item 
+                // newJsonSchema.properties[item.sections].items[item.id] = item
+                if (!newJsonSchema.definitions) {
+                    newJsonSchema.definitions = {}
+                    newJsonSchema.properties[item.sections].items = { "$ref": `#/definitions/${item.sections}` }
+                }
+                if (!newJsonSchema.definitions[item.sections]) {
+                    newJsonSchema.definitions[item.sections] = { type: "object", properties: {} }
+                }
+                newJsonSchema.definitions[item.sections].properties[item.id] = item
             } else {
                 newJsonSchema.properties[item.sections].properties[item.id] = item
             }
@@ -35,55 +35,44 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
                 newJsonSchema.required.push(item.id)
             }
         }
+        setJsonSchema(newJsonSchema);
+    }
 
 
-        if (item.sections && item.sections !== "root") {
-
-        } else {
-
+    const deleteSchemas = (idesThatContinue) => {
+        var All_ids = [];
+        for (const prop in jsonSchema.properties) {
+            All_ids.push(jsonSchema.properties[prop].id)
         }
+        var idsToDelete = All_ids.filter(x => idesThatContinue.indexOf(x) === -1);
 
+        var newJsonSchema = { ...jsonSchema };
+        idsToDelete.forEach(prop => {
+            delete newJsonSchema.properties[prop]
+        });
 
+        if (typeof newJsonSchema.required != 'undefined') {
+            newJsonSchema.required = newJsonSchema.required.filter(x => !idsToDelete.includes(x))
+            if (newJsonSchema.required.length === 0) {
+                delete newJsonSchema.required
+            }
+        }
 
         setJsonSchema(newJsonSchema);
     }
 
-  
-
-        const deleteSchemas = (idesThatContinue) => {
-            var All_ids = [];
-            for (const prop in jsonSchema.properties) {
-                All_ids.push(jsonSchema.properties[prop].id)
+    const analizeFieldsObjects = () => {
+        var enumNameKeys = []
+        var enumKeys = []
+        for (const item in jsonSchema.properties) {
+            if (jsonSchema.properties[item].properties || jsonSchema.properties[item].items) {
+                enumKeys.push(item)
+                enumNameKeys.push(jsonSchema.properties[item].title)
             }
-            var idsToDelete = All_ids.filter(x => idesThatContinue.indexOf(x) === -1);
-
-            var newJsonSchema = { ...jsonSchema };
-            idsToDelete.forEach(prop => {
-                delete newJsonSchema.properties[prop]
-            });
-
-            if (typeof newJsonSchema.required != 'undefined') {
-                newJsonSchema.required = newJsonSchema.required.filter(x => !idsToDelete.includes(x))
-                if (newJsonSchema.required.length === 0) {
-                    delete newJsonSchema.required
-                }
-            }
-
-            setJsonSchema(newJsonSchema);
         }
-
-        const analizeFieldsObjects = () => {
-            var enumNameKeys = []
-            var enumKeys = []
-            for (const item in jsonSchema.properties) {
-                if (jsonSchema.properties[item].properties || jsonSchema.properties[item].items) {
-                    enumKeys.push(item)
-                    enumNameKeys.push(jsonSchema.properties[item].title)
-                }
-            }
-            return { enumKeys, enumNameKeys };
-        }
-
-
-        return { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects }
+        return { enumKeys, enumNameKeys };
     }
+
+
+    return { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects }
+}

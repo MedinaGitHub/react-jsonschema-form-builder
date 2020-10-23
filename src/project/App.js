@@ -27,7 +27,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
 
   const classes = useStyles();
   const { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects } = useJsonSchema(rootSchema);
-  const { uiSchema, addUiSchema, updateUiSchema } = useUiSchema(rootSchemaUi);
+  const { uiSchema, addUiSchema, updateUiSchema, addOrder } = useUiSchema(rootSchemaUi);
   const { formFields, analizeChangeFormBuilder } = useFields(newFields);
 
   const validateParams = (getJsonSchemaForm, prefix) => {
@@ -46,6 +46,8 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
     analizeChangeFormBuilder(result)
     if (item.uiSchema)
       addUiSchema(item.uiSchema);
+    if (uiSchema["ui:order"])
+      addOrder(item.jsonSchema.id)
   }
 
   const updateUi = items => {
@@ -62,7 +64,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
           <Paper className={classes.paper}>
             <ModalNewField formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
             <ModalNewSection addItemForm={addItemForm} prefix={prefix} />
-            <ModalSetOrder jsonSchema={jsonSchema} updateUi={updateUi} />
+            <ModalSetOrder jsonSchema={jsonSchema} uiSchema={uiSchema} updateUi={updateUi} />
             <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> Guardar  </Button >
           </Paper>
         </Grid>

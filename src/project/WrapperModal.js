@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -42,7 +42,7 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 
-export default function WrapperModal(props) {
+export default function WrapperModal({ close= null, onEntered= null, ...props}) {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -51,13 +51,19 @@ export default function WrapperModal(props) {
     const handleClose = () => {
         setOpen(false);
     };
+    
+    useEffect(() => {
+        if(close != null){
+            handleClose();
+        }
+    }, [close]);
 
     return (
         <div style={{ display: 'contents' }}>
             <Button id={'btmopen_form'} variant="contained" color="primary" onClick={handleClickOpen}>
                 {props.txtBtn}
             </Button>
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} onEntered={props.onEntered ? props.onEntered : ''} >
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} onEntered={onEntered} >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     {props.txtTitle}
                 </DialogTitle>
