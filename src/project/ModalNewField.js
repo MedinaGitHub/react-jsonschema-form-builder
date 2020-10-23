@@ -1,46 +1,6 @@
-import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import Form from '@rjsf/material-ui';
-
-const styles = (theme) => ({
-    root: {
-        margin: 0,
-        padding: theme.spacing(2),
-    },
-    closeButton: {
-        position: 'absolute',
-        right: theme.spacing(1),
-        top: theme.spacing(1),
-        color: theme.palette.grey[500],
-    },
-});
-
-const DialogTitle = withStyles(styles)((props) => {
-    const { children, classes, onClose, ...other } = props;
-    return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
-            {onClose ? (
-                <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon />
-                </IconButton>
-            ) : null}
-        </MuiDialogTitle>
-    );
-});
-
-const DialogContent = withStyles((theme) => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiDialogContent);
+import WrapperModal from "./WrapperModal";
 
 export const cleanTextToEnableId = (function () {
     var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç¿?",
@@ -71,7 +31,7 @@ export const handleSubmitModalNewField = (formData, prefix) => {
 
     if (formData.check_id === true) {
         formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
-        formData.id = cleanTextToEnableId(formData.id) 
+        formData.id = cleanTextToEnableId(formData.id)
     }
     newProp.jsonSchema.id = formData.id
     if (typeof formData.description != 'undefined') {
@@ -112,7 +72,7 @@ export const handleSubmitModalNewField = (formData, prefix) => {
             break;
     }
 
-    if(formData.sections){
+    if (formData.sections) {
         newProp.jsonSchema.sections = formData.sections;
     }
 
@@ -120,14 +80,6 @@ export const handleSubmitModalNewField = (formData, prefix) => {
 }
 
 export default function ModalNewField({ formBuilder, addItemForm, prefix = "" }) {
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const onSubmit = ({ formData }, e) => {
         const newProp = handleSubmitModalNewField(formData, prefix)
@@ -135,18 +87,8 @@ export default function ModalNewField({ formBuilder, addItemForm, prefix = "" })
     };
 
     return (
-        <div style={{ display: 'contents' }}>
-            <Button id={'btmopen_form'} variant="contained" color="primary" onClick={handleClickOpen}>
-                Agregar Campo
-            </Button>
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Nuevo Campo
-               </DialogTitle>
-                <DialogContent dividers>
-                    <Form schema={formBuilder} onSubmit={onSubmit} />
-                </DialogContent>
-            </Dialog>
-        </div>
+        <WrapperModal txtBtn="Agregar Campo" txtTitle="Nuevo Campo" >
+            <Form schema={formBuilder} onSubmit={onSubmit} />
+        </WrapperModal>
     );
 }
