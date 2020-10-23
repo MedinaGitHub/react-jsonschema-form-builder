@@ -59,13 +59,25 @@
                             }
                         }
                     }
+                },
+                {
+                    "properties": {
+                        "fieldType": {
+                            "enum": [
+                                "Entrada de texto",
+                                "CheckBox",
+                                "Archivo",
+                                "Fecha"
+                            ]
+                        }
+                    }
                 }
             ]
         },
         "check_id": {
             "oneOf": [
                 {
-                    "properties": {
+                    "properties": { 
                         "check_id": {
                             "enum": [
                                 false
@@ -79,6 +91,15 @@
                     "required": [
                         "id"
                       ]
+                },
+                {
+                    "properties": {
+                        "check_id": {
+                            "enum": [
+                                true
+                            ]
+                        }
+                    }
                 }
             ]
         }

@@ -5,12 +5,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 It's a visual builder of "Json Schema" that export the "Json Schema" generated for then paste this structure of schema in your [react-jsonschema-form component](https://github.com/rjsf-team/react-jsonschema-form) 
 
-# *under contruction
+# *Under construction
 
 ## Why?
 
- Because I needed my clients to create forms visually for then i can export them to another platform whit the sintaxis from react-jsonschema-form
-
+ Because I needed to create forms visually to export them to another system with react-jsonschema-form syntax
 
 # Demo
 
@@ -18,7 +17,7 @@ It's a visual builder of "Json Schema" that export the "Json Schema" generated f
 
 ## How does it work?
 
-Very easy, if know work react-jsonschema-form you will feel comfortable with the code, since the form that makes the final form is made with react-jsonschema-form.
+Very easy, if you know how does react-jsonschema-form work, you will feel comfortable with the code.
 
 # Installation
 
@@ -26,11 +25,11 @@ Very easy, if know work react-jsonschema-form you will feel comfortable with the
 $ npm install react-jsonschema-form-builder
 ```
 
-## How change the design?
+## How does  the design change?
 
-You can do a fork and change  this package @rjsf/material-ui for others available options  in  [Supported Themes](https://github.com/rjsf-team/react-jsonschema-form#documentation)
+You can do a fork and change  this package @rjsf/material-ui For watching another available options  you can read  [Supported Themes](https://github.com/rjsf-team/react-jsonschema-form#documentation)
 
-## Implement
+## Implementation
 
 ```js
 

@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import orderSchema from './schemasJson/order.json';
 import Button from '@material-ui/core/Button';
+import { useListNameForm } from './hooks/useListNameForm';
 
 const styles = theme => ({
   root: {
@@ -50,9 +51,16 @@ const DialogContent = withStyles(theme => ({
   }
 }))(MuiDialogContent);
 
-const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
-  const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = useState(null);
+const ModalSetOrder = ({
+  jsonSchema,
+  updateUi
+}) => {
+  const [open, setOpen] = useState(false);
+  const {
+    listNameForm,
+    transformJsonSchemaToList,
+    newList
+  } = useListNameForm();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -66,7 +74,7 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
     try {
       var index = 0;
 
-      for (const key in listPropForm.properties) {
+      for (const key in jsonSchema.properties) {
         document.getElementById("root_" + index).disabled = true;
         index++;
       }
@@ -76,19 +84,11 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
   };
 
   useEffect(() => {
-    if (Object.keys(listPropForm.properties).length) {
-      var justNames = [];
-
-      for (const prop in listPropForm.properties) {
-        justNames.push(listPropForm.properties[prop].id);
-      }
-
-      setFormData(justNames);
-    }
-  }, [listPropForm]);
+    transformJsonSchemaToList(jsonSchema);
+  }, [jsonSchema]);
 
   const onSubmit = () => {
-    uiSchemaSetOrder(formData);
+    updateUi(listNameForm);
     handleClose();
   };
 
@@ -112,18 +112,18 @@ const ModalOrder = (listPropForm, uiSchemaSetOrder) => {
     style: {
       'margin-top': '10px'
     }
-  }, "Ordenar o eliminar un campo seg\xFAn id.")), /*#__PURE__*/React.createElement(DialogContent, null, formData && /*#__PURE__*/React.createElement("div", {
+  }, "Ordenar o eliminar un campo seg\xFAn id.")), /*#__PURE__*/React.createElement(DialogContent, null, listNameForm && /*#__PURE__*/React.createElement("div", {
     id: "orderForm"
   }, /*#__PURE__*/React.createElement(Form, {
     schema: orderSchema,
     onSubmit: onSubmit,
-    formData: formData,
-    onChange: e => setFormData(e.formData)
+    formData: listNameForm,
+    onChange: e => newList(e.formData)
   })))));
 };
 
-ModalOrder.PT = {
-  listPropForm: PT.shape({
+ModalSetOrder.PT = {
+  jsonSchema: PT.shape({
     properties: PT.arrayOf(PT.object)
   }),
   schemaOrder: PT.shape({
@@ -133,4 +133,4 @@ ModalOrder.PT = {
     type: PT.string
   })
 };
-export default ModalOrder;
+export default ModalSetOrder;

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import modalForm from './ModalForm';
-import ModalOrder from './ModalOrder';
+import ModalNewField from './ModalNewField';
+import ModalSetOrder from './ModalSetOrder';
+import ModalNewSection from './ModalNewSection';
 import Form from '@rjsf/material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Button } from '@material-ui/core';
-import defaultSeed from "./schemasJson/rootSchema.json";
+import { useJsonSchema } from './hooks/useJsonSchema';
+import { useUiSchema } from './hooks/useUiSchema';
+import { useFields } from './hooks/useFields';
+import newFields from './schemasJson/newFields.json';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -25,19 +29,28 @@ function App({
   rootSchemaUi,
   prefix
 }) {
-  const validateParams = (getJsonSchemaForm, rootSchema, rootSchemaUi, prefix) => {
+  const classes = useStyles();
+  const {
+    jsonSchema,
+    addJsonSchema,
+    deleteSchemas,
+    analizeFieldsObjects
+  } = useJsonSchema(rootSchema);
+  const {
+    uiSchema,
+    addUiSchema,
+    updateUiSchema
+  } = useUiSchema(rootSchemaUi);
+  const {
+    formFields,
+    analizeChangeFormBuilder
+  } = useFields(newFields);
+
+  const validateParams = (getJsonSchemaForm, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
       getJsonSchemaForm = item => {
         console.log(item);
       };
-    }
-
-    if (typeof rootSchema !== 'object') {
-      rootSchema = defaultSeed;
-    }
-
-    if (typeof rootSchemaUi !== 'object') {
-      rootSchemaUi = {};
     }
 
     if (typeof prefix !== 'string') {
@@ -45,67 +58,18 @@ function App({
     }
   };
 
-  validateParams(getJsonSchemaForm, rootSchema, rootSchemaUi, prefix);
-  const classes = useStyles();
-  const [jsonSchema, setJsonSchema] = useState(rootSchema);
-  const [uiSchema, setUiSchema] = useState(rootSchemaUi);
+  validateParams(getJsonSchemaForm, prefix);
 
-  const validateRequired = (item, beforeState) => {
-    if (item.jsonSchema.isRequired) {
-      if (!beforeState.required) {
-        beforeState.required = [];
-      }
-
-      beforeState.required.push(item.jsonSchema.id);
-      setJsonSchema(prevState => ({ ...prevState,
-        required: beforeState.required
-      }));
-    }
+  const addItemForm = item => {
+    addJsonSchema(item.jsonSchema);
+    let result = analizeFieldsObjects();
+    analizeChangeFormBuilder(result);
+    if (item.uiSchema) addUiSchema(item.uiSchema);
   };
 
-  const validateUiSchema = item => {
-    if (Object.keys(item.uiSchema).length) {
-      setUiSchema(prevState => ({ ...prevState,
-        [item.jsonSchema.id]: item.uiSchema[item.jsonSchema.id]
-      }));
-    }
-  };
-
-  const deleteSchemas = items => {
-    var justNames = [];
-
-    for (const prop in jsonSchema.properties) {
-      justNames.push(jsonSchema.properties[prop].id);
-    }
-
-    var difference = justNames.filter(x => items.indexOf(x) === -1);
-    var beforeState = { ...jsonSchema
-    };
-    difference.forEach(prop => {
-      delete beforeState.properties[prop];
-    });
-    setJsonSchema(prevState => ({ ...prevState,
-      properties: beforeState.properties
-    }));
-  };
-
-  const uiSchemaSetOrder = items => {
+  const updateUi = items => {
     deleteSchemas(items);
-    items.push('*');
-    setUiSchema(prevState => ({ ...prevState,
-      "ui:order": items
-    }));
-  };
-
-  const getNewProperties = item => {
-    var beforeState = { ...jsonSchema
-    };
-    beforeState.properties[item.jsonSchema.id] = item.jsonSchema;
-    setJsonSchema(prevState => ({ ...prevState,
-      properties: beforeState.properties
-    }));
-    validateRequired(item, beforeState);
-    validateUiSchema(item);
+    updateUiSchema(items);
   };
 
   return /*#__PURE__*/React.createElement("div", {
@@ -121,7 +85,17 @@ function App({
     xs: 5
   }, /*#__PURE__*/React.createElement(Paper, {
     className: classes.paper
-  }, modalForm(getNewProperties, prefix), ModalOrder(jsonSchema, uiSchemaSetOrder), /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(ModalNewField, {
+    formBuilder: formFields,
+    addItemForm: addItemForm,
+    prefix: prefix
+  }), /*#__PURE__*/React.createElement(ModalNewSection, {
+    addItemForm: addItemForm,
+    prefix: prefix
+  }), /*#__PURE__*/React.createElement(ModalSetOrder, {
+    jsonSchema: jsonSchema,
+    updateUi: updateUi
+  }), /*#__PURE__*/React.createElement(Button, {
     onClick: () => getJsonSchemaForm({
       jsonSchema,
       uiSchema
