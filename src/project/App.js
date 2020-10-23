@@ -86,3 +86,11 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
 }
 
 export default App;
+
+/*
+  1 Coverage cercano al 100%
+  2 Fix Select null en agregar new field
+  3 Required dentro de los objetos y arreglos
+  4 Multi idioma con archivo.json
+  5 Pensar en funcionalidad relacionada a las dependencias
+*/
