@@ -1,12 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16'
-import { useListNameForm } from "./useListNameForm";
+import { useListNameForm } from "../../../project/hooks/useListNameForm";
 import { renderHook, act } from '@testing-library/react-hooks'
-
-configure({ adapter: new Adapter() })
-
 
 describe('useUiSchema', () => {
 

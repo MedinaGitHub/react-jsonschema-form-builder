@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-export const useUiSchema = (seedSchemaUi = {}) => {
+export const useUiSchema = (rootSchemaUi = {}) => {
 
-    const [uiSchema, setUiSchema] = useState(seedSchemaUi);
+    const [uiSchema, setUiSchema] = useState(rootSchemaUi);
 
     const addUiSchema = (item) => {
         if (Object.keys(item).length) {

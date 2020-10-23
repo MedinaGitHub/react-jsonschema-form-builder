@@ -8,9 +8,9 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import orderSchema from './schemasJson/orderSchema.json';
+import orderSchema from './schemasJson/order.json';
 import Button from '@material-ui/core/Button';
-import { useListNameForm } from './useListNameForm'
+import { useListNameForm } from './hooks/useListNameForm'
 
 const styles = (theme) => ({
     root: {
@@ -46,7 +46,7 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 
-const ModalOrder = ({ jsonSchema, updateUi }) => {
+const ModalSetOrder = ({ jsonSchema, updateUi }) => {
 
     const [open, setOpen] = useState(false);
     const { listNameForm, transformJsonSchemaToList, newList } = useListNameForm();
@@ -100,7 +100,7 @@ const ModalOrder = ({ jsonSchema, updateUi }) => {
     )
 }
 
-ModalOrder.PT = {
+ModalSetOrder.PT = {
     jsonSchema: PT.shape({
         properties: PT.arrayOf(PT.object)
     }),
@@ -112,4 +112,4 @@ ModalOrder.PT = {
     })
 }
 
-export default ModalOrder;
+export default ModalSetOrder;

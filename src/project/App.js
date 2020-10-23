@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import ModalForm from './ModalForm';
-import ModalOrder from './ModalOrder';
+import ModalNewField from './ModalNewField';
+import ModalSetOrder from './ModalSetOrder';
+import ModalNewSection from './ModalNewSection';
 import Form from '@rjsf/material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Button } from '@material-ui/core';
-import { useJsonSchema } from './useJsonSchema'
-import { useUiSchema } from './useUiSchema'
-
+import { useJsonSchema } from './hooks/useJsonSchema'
+import { useUiSchema } from './hooks/useUiSchema'
+import { useFields } from './hooks/useFields'
+import newFields from './schemasJson/newFields.json';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,10 +23,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
+function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
 
-  const { jsonSchema, addJsonSchema, deleteSchemas } = useJsonSchema(seedSchema);
-  const { uiSchema, addUiSchema, updateUiSchema } = useUiSchema(seedSchemaUi);
+  const classes = useStyles();
+  const { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects } = useJsonSchema(rootSchema);
+  const { uiSchema, addUiSchema, updateUiSchema } = useUiSchema(rootSchemaUi);
+  const { formFields, analizeChangeFormBuilder } = useFields(newFields);
 
   const validateParams = (getJsonSchemaForm, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
@@ -36,11 +40,12 @@ function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
   }
   validateParams(getJsonSchemaForm, prefix);
 
-  const classes = useStyles();
-
   const addItemForm = (item) => {
     addJsonSchema(item.jsonSchema)
-    addUiSchema(item.uiSchema);
+    let result = analizeFieldsObjects();
+    analizeChangeFormBuilder(result)
+    if (item.uiSchema)
+      addUiSchema(item.uiSchema);
   }
 
   const updateUi = items => {
@@ -55,8 +60,9 @@ function App({ getJsonSchemaForm, seedSchema, seedSchemaUi, prefix }) {
         alignItems="center" spacing={3}>
         <Grid item xs={5}  >
           <Paper className={classes.paper}>
-            <ModalForm addItemForm={addItemForm} prefix={prefix} />
-            <ModalOrder jsonSchema={jsonSchema} updateUi={updateUi} />
+            <ModalNewField formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
+            <ModalNewSection addItemForm={addItemForm} prefix={prefix} />
+            <ModalSetOrder jsonSchema={jsonSchema} updateUi={updateUi} />
             <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> Guardar  </Button >
           </Paper>
         </Grid>

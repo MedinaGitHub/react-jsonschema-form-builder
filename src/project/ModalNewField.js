@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Form from '@rjsf/material-ui';
-import formBuilder from './schemasJson/formBuilder.json';
 
 const styles = (theme) => ({
     root: {
@@ -65,7 +64,7 @@ export const cleanTextToEnableId = (function () {
 
 })();
 
-export const handleSubmitModalForm = (formData, prefix) => {
+export const handleSubmitModalNewField = (formData, prefix) => {
     const newProp = { jsonSchema: {}, uiSchema: {} };
 
     newProp.jsonSchema.title = formData.title;
@@ -113,10 +112,14 @@ export const handleSubmitModalForm = (formData, prefix) => {
             break;
     }
 
+    if(formData.sections){
+        newProp.jsonSchema.sections = formData.sections;
+    }
+
     return newProp
 }
 
-export default function ModalForm({ addItemForm, prefix = "" }) {
+export default function ModalNewField({ formBuilder, addItemForm, prefix = "" }) {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -127,7 +130,7 @@ export default function ModalForm({ addItemForm, prefix = "" }) {
     };
 
     const onSubmit = ({ formData }, e) => {
-        const newProp = handleSubmitModalForm(formData, prefix)
+        const newProp = handleSubmitModalNewField(formData, prefix)
         addItemForm(newProp)
     };
 

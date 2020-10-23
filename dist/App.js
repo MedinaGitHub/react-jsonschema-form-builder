@@ -6,7 +6,7 @@ import Form from '@rjsf/material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Grid, Button } from '@material-ui/core';
-import defaultSeed from "./schemasJson/seedSchema.json";
+import defaultSeed from "./schemasJson/rootSchema.json";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -21,23 +21,23 @@ const useStyles = makeStyles(theme => ({
 
 function App({
   getJsonSchemaForm,
-  seedSchema,
-  seedSchemaUi,
+  rootSchema,
+  rootSchemaUi,
   prefix
 }) {
-  const validateParams = (getJsonSchemaForm, seedSchema, seedSchemaUi, prefix) => {
+  const validateParams = (getJsonSchemaForm, rootSchema, rootSchemaUi, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
       getJsonSchemaForm = item => {
         console.log(item);
       };
     }
 
-    if (typeof seedSchema !== 'object') {
-      seedSchema = defaultSeed;
+    if (typeof rootSchema !== 'object') {
+      rootSchema = defaultSeed;
     }
 
-    if (typeof seedSchemaUi !== 'object') {
-      seedSchemaUi = {};
+    if (typeof rootSchemaUi !== 'object') {
+      rootSchemaUi = {};
     }
 
     if (typeof prefix !== 'string') {
@@ -45,10 +45,10 @@ function App({
     }
   };
 
-  validateParams(getJsonSchemaForm, seedSchema, seedSchemaUi, prefix);
+  validateParams(getJsonSchemaForm, rootSchema, rootSchemaUi, prefix);
   const classes = useStyles();
-  const [jsonSchema, setJsonSchema] = useState(seedSchema);
-  const [uiSchema, setUiSchema] = useState(seedSchemaUi);
+  const [jsonSchema, setJsonSchema] = useState(rootSchema);
+  const [uiSchema, setUiSchema] = useState(rootSchemaUi);
 
   const validateRequired = (item, beforeState) => {
     if (item.jsonSchema.isRequired) {

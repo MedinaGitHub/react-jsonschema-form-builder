@@ -10,7 +10,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import orderSchema from './schemasJson/orderSchema.json';
+import orderSchema from './schemasJson/order.json';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({

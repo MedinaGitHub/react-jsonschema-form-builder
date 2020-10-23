@@ -41,7 +41,7 @@ You can do a fork and change  this package @rjsf/material-ui for others availabl
         return (
             <>
                 <FormBuilderSchema
-                    seedSchema={seed} 
+                    rootSchema={seed} 
                 />
             </>
         );
@@ -65,11 +65,11 @@ other properties
 ```js
     //getJsonSchemaForm =>  callback this json schema
     //prefix =>  if you can add prefix before ID of inprus
-    //seedSchemaUi => UiSchema
+    //rootSchemaUi => UiSchema
     <FormBuilderSchema
         getJsonSchemaForm={getJsonSchema}
-        seedSchema={seed} 
-        seedSchemaUi={{}}
+        rootSchema={seed} 
+        rootSchemaUi={{}}
         prefix={'prefix_befores_ides_inputs'} 
     />
 ```

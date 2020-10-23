@@ -1,11 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { shallow, mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16'
-import { renderHook, cleanup, act } from '@testing-library/react-hooks'
-import { useUiSchema } from "./useUiSchema";
-
-configure({ adapter: new Adapter() })
+import { renderHook, act } from '@testing-library/react-hooks'
+import { useUiSchema } from "../../../project/hooks/useUiSchema";
 
 describe('useUiSchema', () => {
 

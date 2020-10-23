@@ -1,11 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { shallow, mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16'
-import { useJsonSchema } from "./useJsonSchema";
+import { useJsonSchema } from "../../../project/hooks/useJsonSchema";
 import { renderHook, cleanup, act } from '@testing-library/react-hooks'
-
-configure({ adapter: new Adapter() })
 
 describe("useJsonSchema", () => {
 

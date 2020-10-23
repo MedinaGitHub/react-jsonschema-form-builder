@@ -1,14 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { shallow, mount, configure, before } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16'
-import ModalForm, { handleSubmitModalForm } from './ModalForm';
-configure({ adapter: new Adapter() })
+import  { handleSubmitModalNewField } from '../../project/ModalNewField';
 
-describe('ModalForm', () => {
+describe('ModalNewField', () => {
 
     it('choose input Text', () => {
-
         var param = {
             check_id: true,
             description: "check in square",
@@ -16,7 +10,7 @@ describe('ModalForm', () => {
             required: true,
             title: "Ñandú is your favorite animal ?"
         }
-        const result = handleSubmitModalForm(param, 'formulario_');
+        const result = handleSubmitModalNewField(param, 'formulario_');
 
         expect(result).toEqual(
             {
@@ -35,7 +29,6 @@ describe('ModalForm', () => {
     })
 
     it('choose input Select', () => {
-
         var param = {
             check_id: true,
             description: "Select your Country",
@@ -44,7 +37,7 @@ describe('ModalForm', () => {
             required: true,
             title: "Country"
         }
-        const result = handleSubmitModalForm(param, 'formulario_');
+        const result = handleSubmitModalNewField(param, 'formulario_');
 
         expect(result).toEqual(
             {
@@ -64,7 +57,6 @@ describe('ModalForm', () => {
     })
 
     it('choose input CheckBox', () => {
-
         var param = {
             check_id: true,
             description: "check the square",
@@ -72,7 +64,7 @@ describe('ModalForm', () => {
             required: false,
             title: "do you have animals?"
         }
-        const result = handleSubmitModalForm(param, 'formulario_');
+        const result = handleSubmitModalNewField(param, 'formulario_');
 
         expect(result).toEqual(
             {
@@ -90,7 +82,6 @@ describe('ModalForm', () => {
     })
 
     it('choose input File', () => {
-
         var param = {
             check_id: false,
             description: "just PDF",
@@ -99,7 +90,7 @@ describe('ModalForm', () => {
             required: false,
             title: "Upload your CV"
         }
-        const result = handleSubmitModalForm(param, 'formulario_');
+        const result = handleSubmitModalNewField(param, 'formulario_');
 
         expect(result).toEqual(
             {
@@ -118,7 +109,6 @@ describe('ModalForm', () => {
     })
 
     it('choose input Date', () => {
-
         var param = {
             check_id: true,
             description: "Select you birth date",
@@ -126,7 +116,7 @@ describe('ModalForm', () => {
             required: true,
             title: "Birth date"
         }
-        const result = handleSubmitModalForm(param, 'formulario_');
+        const result = handleSubmitModalNewField(param, 'formulario_');
 
         expect(result).toEqual(
             {
@@ -142,7 +132,5 @@ describe('ModalForm', () => {
                 }
             }
         )
-
     })
-
 })
