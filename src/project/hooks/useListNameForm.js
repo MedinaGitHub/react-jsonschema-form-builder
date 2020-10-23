@@ -4,10 +4,8 @@ export const useListNameForm = () => {
 
     const [listNameForm, setListNameForm] = useState(null);
 
-    const transformJsonSchemaToList = (jsonSchema, uiSchema) => {
-        console.log('uiSchema',uiSchema)
-        console.log('jsonSchema',jsonSchema)
-        if (uiSchema['ui:order']) {
+    const transformJsonSchemaToList = (jsonSchema, uiSchema) => {   
+        if (uiSchema && typeof uiSchema['ui:order'] != 'undefined') {
             const result = uiSchema['ui:order'].filter(x => x != '*')
             setListNameForm(result)
         } else {
