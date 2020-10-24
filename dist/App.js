@@ -11,6 +11,7 @@ import { useJsonSchema } from './hooks/useJsonSchema';
 import { useUiSchema } from './hooks/useUiSchema';
 import { useFields } from './hooks/useFields';
 import newFields from './schemasJson/newFields.json';
+import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -39,7 +40,8 @@ function App({
   const {
     uiSchema,
     addUiSchema,
-    updateUiSchema
+    updateUiSchema,
+    addOrder
   } = useUiSchema(rootSchemaUi);
   const {
     formFields,
@@ -65,6 +67,7 @@ function App({
     let result = analizeFieldsObjects();
     analizeChangeStructureModalFields(result);
     if (item.uiSchema) addUiSchema(item.uiSchema);
+    if (uiSchema["ui:order"]) addOrder(item.jsonSchema.id);
   };
 
   const updateUi = items => {
@@ -94,6 +97,7 @@ function App({
     prefix: prefix
   }), /*#__PURE__*/React.createElement(ModalSetOrder, {
     jsonSchema: jsonSchema,
+    uiSchema: uiSchema,
     updateUi: updateUi
   }), /*#__PURE__*/React.createElement(Button, {
     onClick: () => getJsonSchemaForm({
@@ -102,7 +106,7 @@ function App({
     }),
     variant: "contained",
     color: "primary"
-  }, " Guardar  ")))), /*#__PURE__*/React.createElement(Grid, {
+  }, " ", /*#__PURE__*/React.createElement(SaveRoundedIcon, null), "  ")))), /*#__PURE__*/React.createElement(Grid, {
     container: true,
     direction: "row",
     justify: "center",

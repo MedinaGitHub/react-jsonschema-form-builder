@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-export const useFields = formFields2 => {
-  const [formFields, setFields] = useState(formFields2);
+export const useFields = structureJsonSchemaOfModalFields => {
+  const [formFields, setFields] = useState(structureJsonSchemaOfModalFields);
 
   const analizeChangeStructureModalFields = result => {
     const newFields = { ...formFields

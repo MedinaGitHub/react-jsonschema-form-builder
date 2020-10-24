@@ -10,6 +10,15 @@ export const useUiSchema = (rootSchemaUi = {}) => {
     }
   };
 
+  const addOrder = id => {
+    const newUiSchema = { ...uiSchema
+    };
+    newUiSchema["ui:order"] = newUiSchema["ui:order"].filter(x => x != '*');
+    newUiSchema["ui:order"].push(id);
+    newUiSchema["ui:order"].push('*');
+    setUiSchema(newUiSchema);
+  };
+
   const updateUiSchema = items => {
     items.push('*');
     setUiSchema({
@@ -20,6 +29,7 @@ export const useUiSchema = (rootSchemaUi = {}) => {
   return {
     uiSchema,
     addUiSchema,
-    updateUiSchema
+    updateUiSchema,
+    addOrder
   };
 };

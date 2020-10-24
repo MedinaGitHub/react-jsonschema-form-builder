@@ -1,76 +1,25 @@
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-import React, { useState, useEffect } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
 import Form from '@rjsf/material-ui';
 import PT from 'prop-types';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
 import orderSchema from './schemasJson/order.json';
-import Button from '@material-ui/core/Button';
 import { useListNameForm } from './hooks/useListNameForm';
-
-const styles = theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2)
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500]
-  }
-});
-
-const DialogTitle = withStyles(styles)(props => {
-  const {
-    children,
-    classes,
-    onClose,
-    ...other
-  } = props;
-  return /*#__PURE__*/React.createElement(MuiDialogTitle, _extends({
-    disableTypography: true,
-    className: classes.root
-  }, other), /*#__PURE__*/React.createElement(Typography, {
-    variant: "h6"
-  }, children), onClose ? /*#__PURE__*/React.createElement(IconButton, {
-    "aria-label": "close",
-    className: classes.closeButton,
-    onClick: onClose
-  }, /*#__PURE__*/React.createElement(CloseIcon, null)) : null);
-});
-const DialogContent = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(2)
-  }
-}))(MuiDialogContent);
+import WrapperModal from "./WrapperModal";
+import ImportExportIcon from '@material-ui/icons/ImportExport';
+import SendIcon from '@material-ui/icons/Send';
 
 const ModalSetOrder = ({
   jsonSchema,
+  uiSchema,
   updateUi
 }) => {
-  const [open, setOpen] = useState(false);
   const {
     listNameForm,
     transformJsonSchemaToList,
     newList
   } = useListNameForm();
+  const [close, setClose] = useState(null);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const desabledInputs = () => {
+  const disabledInputs = () => {
     try {
       var index = 0;
 
@@ -79,58 +28,43 @@ const ModalSetOrder = ({
         index++;
       }
     } catch (error) {
-      console.log('error', error);
+      console.log('errbClose={cbClose} or', error);
     }
   };
 
   useEffect(() => {
-    transformJsonSchemaToList(jsonSchema);
-  }, [jsonSchema]);
+    transformJsonSchemaToList(jsonSchema, uiSchema);
+  }, [jsonSchema, uiSchema]);
 
   const onSubmit = () => {
     updateUi(listNameForm);
-    handleClose();
+    setClose(true);
+    setTimeout(() => {
+      setClose(null);
+    }, 1000);
   };
 
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'contents'
-    }
-  }, /*#__PURE__*/React.createElement(Button, {
-    variant: "contained",
-    color: "primary",
-    onClick: handleClickOpen
-  }, "Ordenar o Eliminar"), /*#__PURE__*/React.createElement(Dialog, {
-    onClose: handleClose,
-    "aria-labelledby": "customized-dialog-title",
-    open: open,
-    onEntered: desabledInputs
-  }, /*#__PURE__*/React.createElement(DialogTitle, {
-    id: "customized-dialog-title",
-    onClose: handleClose
+  return /*#__PURE__*/React.createElement(WrapperModal, {
+    close: close,
+    txtBtn: /*#__PURE__*/React.createElement(ImportExportIcon, null),
+    txtTitle: "",
+    onEntered: disabledInputs
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      'margin-top': '10px'
-    }
-  }, "Ordenar o eliminar un campo seg\xFAn id.")), /*#__PURE__*/React.createElement(DialogContent, null, listNameForm && /*#__PURE__*/React.createElement("div", {
     id: "orderForm"
   }, /*#__PURE__*/React.createElement(Form, {
     schema: orderSchema,
     onSubmit: onSubmit,
     formData: listNameForm,
     onChange: e => newList(e.formData)
-  })))));
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary",
+    type: "submit"
+  }, " ", /*#__PURE__*/React.createElement(SendIcon, null), " "))));
 };
 
 ModalSetOrder.PT = {
   jsonSchema: PT.shape({
     properties: PT.arrayOf(PT.object)
-  }),
-  schemaOrder: PT.shape({
-    properties: PT.arrayOf(PT.object),
-    title: PT.string,
-    description: PT.string,
-    type: PT.string
   })
 };
 export default ModalSetOrder;

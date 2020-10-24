@@ -9,7 +9,7 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
 
     if (item.sections && item.sections !== "root") {
       if (newJsonSchema.properties[item.sections].items) {
-        // newJsonSchema.properties[item.sections].items[item.id] = item
+        //array
         if (!newJsonSchema.definitions) {
           newJsonSchema.definitions = {};
           newJsonSchema.properties[item.sections].items = {
@@ -25,15 +25,26 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
         }
 
         newJsonSchema.definitions[item.sections].properties[item.id] = item;
-      } else {
-        newJsonSchema.properties[item.sections].properties[item.id] = item;
-      }
-      /*
-      if (!newJsonSchema.properties[item.sections].required) {
-          newJsonSchema.properties[item.sections].required = []
-      }
-      newJsonSchema.properties[item.sections].required.push(item.id)*/
 
+        if (item.isRequired) {
+          if (!newJsonSchema.definitions[item.sections].required) {
+            newJsonSchema.definitions[item.sections].required = [];
+          }
+
+          newJsonSchema.definitions[item.sections].required.push(item.id);
+        }
+      } else {
+        //object
+        newJsonSchema.properties[item.sections].properties[item.id] = item;
+
+        if (item.isRequired) {
+          if (!newJsonSchema.properties[item.sections].required) {
+            newJsonSchema.properties[item.sections].required = [];
+          }
+
+          newJsonSchema.properties[item.sections].required.push(item.id);
+        }
+      }
     } else {
       newJsonSchema.properties[item.id] = item;
 
@@ -45,8 +56,6 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
         newJsonSchema.required.push(item.id);
       }
     }
-
-    if (item.sections && item.sections !== "root") {} else {}
 
     setJsonSchema(newJsonSchema);
   };
