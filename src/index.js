@@ -7,6 +7,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App
       getJsonSchemaForm={(item) => { console.log('el response', item) }}
+      rootSchemaUi={{}}
       prefix={'formulario_'} />
   </React.StrictMode>,
   document.getElementById('root')

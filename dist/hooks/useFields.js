@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 export const useFields = formFields2 => {
   const [formFields, setFields] = useState(formFields2);
 
-  const analizeChangeFormBuilder = result => {
+  const analizeChangeStructureModalFields = result => {
     const newFields = { ...formFields
     };
 
@@ -24,6 +24,6 @@ export const useFields = formFields2 => {
 
   return {
     formFields,
-    analizeChangeFormBuilder
+    analizeChangeStructureModalFields
   };
 };

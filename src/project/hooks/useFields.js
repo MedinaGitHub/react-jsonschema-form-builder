@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-export const useFields = (formFields2) => {
+export const useFields = (structureJsonSchemaOfModalFields) => {
 
-    const [formFields, setFields] = useState(formFields2);
+    const [formFields, setFields] = useState(structureJsonSchemaOfModalFields);
 
-    const analizeChangeFormBuilder = (result) => {
+    const analizeChangeStructureModalFields = (result) => {
         const newFields = { ...formFields };
         if (result.enumKeys.length > 0) {
             newFields.properties.sections = {
@@ -25,6 +25,5 @@ export const useFields = (formFields2) => {
             }
         }
     }
-
-    return { formFields, analizeChangeFormBuilder }
+    return { formFields, analizeChangeStructureModalFields }
 } 

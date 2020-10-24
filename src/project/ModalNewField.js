@@ -1,7 +1,8 @@
 import React from 'react';
 import Form from '@rjsf/material-ui';
 import WrapperModal from "./WrapperModal";
-
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import SendIcon from '@material-ui/icons/Send';
 export const cleanTextToEnableId = (function () {
     var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç¿?",
         to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc__",
@@ -87,8 +88,13 @@ export default function ModalNewField({ formBuilder, addItemForm, prefix = "" })
     };
 
     return (
-        <WrapperModal txtBtn="Agregar Campo" txtTitle="Nuevo Campo" >
-            <Form schema={formBuilder} onSubmit={onSubmit} />
+        <WrapperModal txtBtn={<AddRoundedIcon />} txtTitle="" >
+            <Form schema={formBuilder} onSubmit={onSubmit} >
+                <div>
+                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon/> </button>
+                </div>
+            </Form>
+
         </WrapperModal>
     );
 }

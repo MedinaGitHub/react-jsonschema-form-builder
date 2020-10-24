@@ -1,0 +1,39 @@
+{
+    "definitions": {
+      "formulario_test_array_id": {
+        "properties": {
+          "formulario_test_inside_array_id": {
+            "id": "formulario_test_inside_array_id",
+            "sections": "formulario_test_array_id",
+            "title": "test inside array",
+            "type": "string"
+          }
+        },
+        " type": "object"
+      }
+    },
+    "description": "Subtítulo",
+    "properties": {
+      "formulario_test_1_id": {
+        "id": "formulario_test_1_id",
+        "title": "test 1",
+        "type": "string"
+      },
+      " formulario_test_2_id": {
+        "id": "formulario_test_2_id",
+        "title": "test 2",
+        "type": "string"
+      },
+      " formulario_test_array_id": {
+        "description": "",
+        "id": "formulario_test_array_id",
+        "items": {
+          "$ref": "#/definitions/formulario_test_array_id"
+        },
+        "title": "test Array",
+        "type": "array"
+      }
+    },
+    "title": "Título del Formulario",
+    "type": "object"
+  }

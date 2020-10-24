@@ -43,7 +43,7 @@ function App({
   } = useUiSchema(rootSchemaUi);
   const {
     formFields,
-    analizeChangeFormBuilder
+    analizeChangeStructureModalFields
   } = useFields(newFields);
 
   const validateParams = (getJsonSchemaForm, prefix) => {
@@ -63,7 +63,7 @@ function App({
   const addItemForm = item => {
     addJsonSchema(item.jsonSchema);
     let result = analizeFieldsObjects();
-    analizeChangeFormBuilder(result);
+    analizeChangeStructureModalFields(result);
     if (item.uiSchema) addUiSchema(item.uiSchema);
   };
 

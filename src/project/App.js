@@ -11,6 +11,7 @@ import { useJsonSchema } from './hooks/useJsonSchema'
 import { useUiSchema } from './hooks/useUiSchema'
 import { useFields } from './hooks/useFields'
 import newFields from './schemasJson/newFields.json';
+import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
   const classes = useStyles();
   const { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects } = useJsonSchema(rootSchema);
   const { uiSchema, addUiSchema, updateUiSchema, addOrder } = useUiSchema(rootSchemaUi);
-  const { formFields, analizeChangeFormBuilder } = useFields(newFields);
+  const { formFields, analizeChangeStructureModalFields } = useFields(newFields);
 
   const validateParams = (getJsonSchemaForm, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
@@ -43,7 +44,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
   const addItemForm = (item) => {
     addJsonSchema(item.jsonSchema)
     let result = analizeFieldsObjects();
-    analizeChangeFormBuilder(result)
+    analizeChangeStructureModalFields(result)
     if (item.uiSchema)
       addUiSchema(item.uiSchema);
     if (uiSchema["ui:order"])
@@ -65,7 +66,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
             <ModalNewField formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
             <ModalNewSection addItemForm={addItemForm} prefix={prefix} />
             <ModalSetOrder jsonSchema={jsonSchema} uiSchema={uiSchema} updateUi={updateUi} />
-            <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> Guardar  </Button >
+            <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> <SaveRoundedIcon/>  </Button >
           </Paper>
         </Grid>
       </Grid>
@@ -90,9 +91,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
 export default App;
 
 /*
-  1 Coverage cercano al 100%
-  2 Fix Select null en agregar new field
-  3 Required dentro de los objetos y arreglos
   4 Multi idioma con archivo.json
   5 Pensar en funcionalidad relacionada a las dependencias
+  1 Coverage cercano al 100%
 */

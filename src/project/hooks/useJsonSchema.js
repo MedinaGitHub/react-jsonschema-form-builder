@@ -7,8 +7,8 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
         var newJsonSchema = { ...jsonSchema };
 
         if (item.sections && item.sections !== "root") {
-            if (newJsonSchema.properties[item.sections].items) {
-                // newJsonSchema.properties[item.sections].items[item.id] = item
+            debugger
+            if (newJsonSchema.properties[item.sections].items) { //array
                 if (!newJsonSchema.definitions) {
                     newJsonSchema.definitions = {}
                     newJsonSchema.properties[item.sections].items = { "$ref": `#/definitions/${item.sections}` }
@@ -17,15 +17,22 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
                     newJsonSchema.definitions[item.sections] = { type: "object", properties: {} }
                 }
                 newJsonSchema.definitions[item.sections].properties[item.id] = item
-            } else {
+                if (item.isRequired) {
+                    if (!newJsonSchema.definitions[item.sections].required) {
+                        newJsonSchema.definitions[item.sections].required = []
+                    }
+                    newJsonSchema.definitions[item.sections].required.push(item.id)
+                }
+            } else {//object
                 newJsonSchema.properties[item.sections].properties[item.id] = item
-            }
 
-            /*
-            if (!newJsonSchema.properties[item.sections].required) {
-                newJsonSchema.properties[item.sections].required = []
+                if (item.isRequired) {
+                    if (!newJsonSchema.properties[item.sections].required) {
+                        newJsonSchema.properties[item.sections].required = []
+                    }
+                    newJsonSchema.properties[item.sections].required.push(item.id)
+                }
             }
-            newJsonSchema.properties[item.sections].required.push(item.id)*/
         } else {
             newJsonSchema.properties[item.id] = item
             if (item.isRequired) {

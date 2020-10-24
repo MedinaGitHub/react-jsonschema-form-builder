@@ -65,9 +65,9 @@ export default function WrapperModal({ close= null, onEntered= null, ...props}) 
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} onEntered={onEntered} >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    {props.txtTitle}
+                    {/*props.txtTitle*/}
                 </DialogTitle>
-                <DialogContent dividers>
+                <DialogContent>
                     {props.children}
                 </DialogContent>
             </Dialog>

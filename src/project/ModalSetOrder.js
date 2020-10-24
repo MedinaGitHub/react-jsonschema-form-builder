@@ -4,6 +4,8 @@ import PT from 'prop-types';
 import orderSchema from './schemasJson/order.json';
 import { useListNameForm } from './hooks/useListNameForm'
 import WrapperModal from "./WrapperModal";
+import ImportExportIcon from '@material-ui/icons/ImportExport';
+import SendIcon from '@material-ui/icons/Send';
 
 const ModalSetOrder = ({ jsonSchema, uiSchema, updateUi }) => {
 
@@ -23,7 +25,6 @@ const ModalSetOrder = ({ jsonSchema, uiSchema, updateUi }) => {
     }
 
     useEffect(() => {
-        console.log('hola',uiSchema)
         transformJsonSchemaToList(jsonSchema, uiSchema)
     }, [jsonSchema, uiSchema]);
 
@@ -35,11 +36,13 @@ const ModalSetOrder = ({ jsonSchema, uiSchema, updateUi }) => {
         }, 1000);
     }
 
-
     return (
-
-        <WrapperModal close={close} txtBtn="Ordenar o Eliminar" txtTitle="Ordenar o eliminar un campo según id." onEntered={disabledInputs}>
-            <Form schema={orderSchema} onSubmit={onSubmit} formData={listNameForm} onChange={e => newList(e.formData)} />
+        <WrapperModal close={close} txtBtn={<ImportExportIcon />} txtTitle="" onEntered={disabledInputs}>
+            <div id="orderForm">
+                <Form schema={orderSchema} onSubmit={onSubmit} formData={listNameForm} onChange={e => newList(e.formData)} >
+                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon /> </button>
+                </Form>
+            </div>
         </WrapperModal>
     )
 }
@@ -47,12 +50,6 @@ const ModalSetOrder = ({ jsonSchema, uiSchema, updateUi }) => {
 ModalSetOrder.PT = {
     jsonSchema: PT.shape({
         properties: PT.arrayOf(PT.object)
-    }),
-    schemaOrder: PT.shape({
-        properties: PT.arrayOf(PT.object),
-        title: PT.string,
-        description: PT.string,
-        type: PT.string,
     })
 }
 

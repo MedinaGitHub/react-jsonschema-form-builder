@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow, mount, render } from 'enzyme';
 import App from '../../project/App';
-import defaultSeed from "../../project/schemasJson/rootSchema.json";
+import defaultSeed from "./schemasJson/rootSchemaTest.json"
 
 describe("custom hook: useTodos", () => {
 
@@ -21,15 +21,12 @@ describe("custom hook: useTodos", () => {
                 prefix={prefix}
             />
         )
-        const respuesta = wrapper.find('.MuiFormControl-root').at(0).text().includes('Título del Formulario')
-        expect(respuesta).toEqual(true)
-    })
 
-    it("render App without any parameter", () => {
-        const wrapper = mount(
-            <App />
-        )
-        const respuesta = wrapper.find('.MuiFormControl-root').at(0).text().includes('Título del Formulario')
-        expect(respuesta).toEqual(true)
+      wrapper
+      .find('button')
+      .at(2)
+      .simulate('click');
+        const respuesta = wrapper.find('input').get(0).props.value
+        expect(respuesta).toEqual("formulario_test_1_id")
     })
 });

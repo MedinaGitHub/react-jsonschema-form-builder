@@ -1,5 +1,5 @@
 {
-    "title": "",
+    "title": "Ingrese un nuevo campo",
     "description": "",
     "type": "object",
     "required": [
@@ -58,7 +58,10 @@
                                 "type": "string"
                             }
                         }
-                    }
+                    },
+                    "required": [
+                        "options"
+                      ]
                 },
                 {
                     "properties": {

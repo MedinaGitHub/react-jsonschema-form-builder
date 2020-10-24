@@ -3,6 +3,8 @@ import Form from '@rjsf/material-ui';
 import newSection from './schemasJson/newSection.json';
 import { cleanTextToEnableId } from "./ModalNewField";
 import WrapperModal from "./WrapperModal";
+import PlaylistAddRoundedIcon from '@material-ui/icons/PlaylistAddRounded';
+import SendIcon from '@material-ui/icons/Send';
 
 export const handleSubmitModalNewSection = (formData, prefix = '') => {
     const newProp = { jsonSchema: {} };
@@ -35,8 +37,12 @@ export default function ModalNewSection({ addItemForm, prefix }) {
     };
 
     return (
-        <WrapperModal txtBtn="Agregar Sección" txtTitle="Nuevo Sección" >
-            <Form schema={newSection} onSubmit={onSubmit} />
+        <WrapperModal txtBtn={<PlaylistAddRoundedIcon/>} txtTitle="" >
+            <Form schema={newSection} onSubmit={onSubmit} >
+                <div>
+                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon/> </button>
+                </div>
+            </Form>
         </WrapperModal>
     )
 }
