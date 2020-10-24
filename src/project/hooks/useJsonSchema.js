@@ -7,7 +7,6 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
         var newJsonSchema = { ...jsonSchema };
 
         if (item.sections && item.sections !== "root") {
-            debugger
             if (newJsonSchema.properties[item.sections].items) { //array
                 if (!newJsonSchema.definitions) {
                     newJsonSchema.definitions = {}

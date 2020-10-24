@@ -13,7 +13,6 @@ export const useUiSchema = (rootSchemaUi = {}) => {
     }
 
     const addOrder = (id) => {
-        debugger
         const newUiSchema = { ...uiSchema };
         newUiSchema["ui:order"] = newUiSchema["ui:order"].filter(x => x != '*')
         newUiSchema["ui:order"].push(id)

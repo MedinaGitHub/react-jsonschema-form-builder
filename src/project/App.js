@@ -89,9 +89,3 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
 }
 
 export default App;
-
-/*
-  4 Multi idioma con archivo.json
-  5 Pensar en funcionalidad relacionada a las dependencias
-  1 Coverage cercano al 100%
-*/
