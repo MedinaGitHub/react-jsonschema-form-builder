@@ -42,11 +42,12 @@ export const handleSubmitModalNewField = (formData, prefix) => {
     if (formData.required) {
         newProp.jsonSchema.isRequired = formData.required;
     }
+    debugger;
     switch (formData.fieldType) {
-        case "Entrada de texto":
+        case "Input":
             newProp.jsonSchema.type = "string";
             break;
-        case "Selector":
+        case "Select":
             newProp.jsonSchema.type = "string";
             newProp.jsonSchema.enum = formData.options;
             let beforeObject = newProp.uiSchema[formData.id];
@@ -60,11 +61,12 @@ export const handleSubmitModalNewField = (formData, prefix) => {
             let beforeObjectRadio = newProp.uiSchema[formData.id];
             newProp.uiSchema[formData.id] = { ...beforeObjectRadio, ...{ "ui:widget": "radio" } }
             break;
-        case "Archivo":
+        case "File":
             newProp.jsonSchema.type = "string";
             newProp.jsonSchema.format = "data-url";
+            newProp.uiSchema[formData.id] = { ...newProp.uiSchema[formData.id], ...{ "ui:options": {"accept":  formData.enableFiles } } }
             break;
-        case "Fecha":
+        case "Date":
             newProp.jsonSchema.type = "string";
             newProp.jsonSchema.format = "date";
             break;

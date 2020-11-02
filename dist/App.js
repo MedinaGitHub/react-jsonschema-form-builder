@@ -28,7 +28,8 @@ function App({
   getJsonSchemaForm,
   rootSchema,
   rootSchemaUi,
-  prefix
+  prefix,
+  customWidgets = {}
 }) {
   const classes = useStyles();
   const {
@@ -47,6 +48,8 @@ function App({
     formFields,
     analizeChangeStructureModalFields
   } = useFields(newFields);
+  const widgets = { ...customWidgets
+  };
 
   const validateParams = (getJsonSchemaForm, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
@@ -118,6 +121,7 @@ function App({
   }, /*#__PURE__*/React.createElement(Paper, {
     className: classes.paper
   }, /*#__PURE__*/React.createElement(Form, {
+    widgets: widgets,
     schema: jsonSchema,
     uiSchema: uiSchema
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {

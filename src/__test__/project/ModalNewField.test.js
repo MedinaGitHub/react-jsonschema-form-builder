@@ -1,4 +1,4 @@
-import  { handleSubmitModalNewField } from '../../project/ModalNewField';
+import { handleSubmitModalNewField } from '../../project/ModalNewField';
 
 describe('ModalNewField', () => {
 
@@ -6,7 +6,7 @@ describe('ModalNewField', () => {
         var param = {
             check_id: true,
             description: "check in square",
-            fieldType: "Entrada de texto",
+            fieldType: "Input",
             required: true,
             title: "Ñandú is your favorite animal ?"
         }
@@ -32,7 +32,7 @@ describe('ModalNewField', () => {
         var param = {
             check_id: true,
             description: "Select your Country",
-            fieldType: "Selector",
+            fieldType: "Select",
             options: (2)["Chile", "New Zeland"],
             required: true,
             title: "Country"
@@ -85,7 +85,9 @@ describe('ModalNewField', () => {
         var param = {
             check_id: false,
             description: "just PDF",
-            fieldType: "Archivo",
+            enableFiles: "image/*",
+            fieldType: "File",
+
             id: "PDF",
             required: false,
             title: "Upload your CV"
@@ -101,7 +103,11 @@ describe('ModalNewField', () => {
                     type: "string"
                 },
                 uiSchema: {
-                    PDF: { "ui:help": "just PDF" }
+                    PDF: {
+                        "ui:help": "just PDF", "ui:options": {
+                            "accept": "image/*"
+                        }
+                    }
                 }
             }
         )
@@ -112,7 +118,7 @@ describe('ModalNewField', () => {
         var param = {
             check_id: true,
             description: "Select you birth date",
-            fieldType: "Fecha",
+            fieldType: "Date",
             required: true,
             title: "Birth date"
         }

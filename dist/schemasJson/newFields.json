@@ -11,7 +11,7 @@
             "type": "string",
             "title": "Tipo de campo",
             "enum": [
-                "Entrada de texto",
+                "input",
                 "Selector",
                 "CheckBox",
                 "Archivo",
@@ -67,7 +67,7 @@
                     "properties": {
                         "fieldType": {
                             "enum": [
-                                "Entrada de texto",
+                                "input",
                                 "CheckBox",
                                 "Archivo",
                                 "Fecha"

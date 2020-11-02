@@ -11,6 +11,13 @@
             "type": "string",
             "title": "Tipo de campo",
             "enum": [
+                "Input",
+                "Select",
+                "CheckBox",
+                "File",
+                "Date"
+            ],
+            "enumNames": [
                 "Entrada de texto",
                 "Selector",
                 "CheckBox",
@@ -48,7 +55,7 @@
                     "properties": {
                         "fieldType": {
                             "enum": [
-                                "Selector"
+                                "Select"
                             ]
                         },
                         "options": {
@@ -61,16 +68,39 @@
                     },
                     "required": [
                         "options"
-                      ]
+                    ]
                 },
                 {
                     "properties": {
                         "fieldType": {
                             "enum": [
-                                "Entrada de texto",
+                                "File"
+                            ]
+                        },
+                        "enableFiles": {
+                            "type": "string",
+                            "title": "Tipo de archivo permitido",
+                            "enum": [
+                                ".pdf",
+                                "image/*"
+                            ],
+                            "enumNames": [
+                                "PDF",
+                                "Imagen"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "enableFiles"
+                    ]
+                },
+                {
+                    "properties": {
+                        "fieldType": {
+                            "enum": [
+                                "Input",
                                 "CheckBox",
-                                "Archivo",
-                                "Fecha"
+                                "Date"
                             ]
                         }
                     }
@@ -80,7 +110,7 @@
         "check_id": {
             "oneOf": [
                 {
-                    "properties": { 
+                    "properties": {
                         "check_id": {
                             "enum": [
                                 false
@@ -93,7 +123,7 @@
                     },
                     "required": [
                         "id"
-                      ]
+                    ]
                 },
                 {
                     "properties": {

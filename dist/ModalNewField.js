@@ -46,7 +46,7 @@ export const handleSubmitModalNewField = (formData, prefix) => {
   }
 
   switch (formData.fieldType) {
-    case "Entrada de texto":
+    case "input":
       newProp.jsonSchema.type = "string";
       break;
 
@@ -80,7 +80,7 @@ export const handleSubmitModalNewField = (formData, prefix) => {
       newProp.jsonSchema.format = "data-url";
       break;
 
-    case "Fecha":
+    case "Date":
       newProp.jsonSchema.type = "string";
       newProp.jsonSchema.format = "date";
       break;

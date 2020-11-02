@@ -16,8 +16,8 @@ describe('useFields', () => {
                 "type": "string",
                 "title": "Tipo de campo",
                 "enum": [
-                    "Entrada de texto",
-                    "Selector",
+                    "input",
+                    "Select",
                     "CheckBox",
                     "Archivo",
                     "Fecha"
@@ -53,7 +53,7 @@ describe('useFields', () => {
                         "properties": {
                             "fieldType": {
                                 "enum": [
-                                    "Selector"
+                                    "Select"
                                 ]
                             },
                             "options": {
@@ -69,7 +69,7 @@ describe('useFields', () => {
                         "properties": {
                             "fieldType": {
                                 "enum": [
-                                    "Entrada de texto",
+                                    "input",
                                     "CheckBox",
                                     "Archivo",
                                     "Fecha"
@@ -127,7 +127,7 @@ describe('useFields', () => {
                         "properties": {
                             "fieldType": {
                                 "enum": [
-                                    "Selector"
+                                    "Select"
                                 ]
                             },
                             "options": {
@@ -143,7 +143,7 @@ describe('useFields', () => {
                         "properties": {
                             "fieldType": {
                                 "enum": [
-                                    "Entrada de texto",
+                                    "input",
                                     "CheckBox",
                                     "Archivo",
                                     "Fecha"
