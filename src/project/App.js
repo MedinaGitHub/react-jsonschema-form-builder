@@ -24,12 +24,17 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
+function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix, customWidgets = {} }) {
 
   const classes = useStyles();
   const { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects } = useJsonSchema(rootSchema);
   const { uiSchema, addUiSchema, updateUiSchema, addOrder } = useUiSchema(rootSchemaUi);
   const { formFields, analizeChangeStructureModalFields } = useFields(newFields);
+
+
+  const widgets = {
+    ...customWidgets
+  };
 
   const validateParams = (getJsonSchemaForm, prefix) => {
     if (typeof getJsonSchemaForm !== 'function') {
@@ -75,7 +80,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix }) {
         alignItems="center" spacing={3}>
         <Grid item xs={5}>
           <Paper className={classes.paper}>
-            <Form schema={jsonSchema}
+            <Form widgets={widgets} schema={jsonSchema}
               uiSchema={uiSchema} >
               <div>
                 <button type="submit" style={{ display: "none" }}>Submit</button>

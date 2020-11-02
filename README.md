@@ -63,11 +63,13 @@ other properties
     //getJsonSchemaForm =>  callback this json schema
     //prefix =>  if you can add prefix before ID of inprus
     //rootSchemaUi => UiSchema
+    //customWidgets => you can import some custom Widget
     <FormBuilderSchema
         getJsonSchemaForm={getJsonSchema}
         rootSchema={seed} 
         rootSchemaUi={{}}
         prefix={'prefix_befores_ides_inputs'} 
+        customWidgets={{CustomCheckbox, FileWidget, ...}}
     />
 ```
 
