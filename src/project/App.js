@@ -50,10 +50,8 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix, customWidget
     addJsonSchema(item.jsonSchema)
     let result = analizeFieldsObjects();
     analizeChangeStructureModalFields(result)
-    if (item.uiSchema)
-      addUiSchema(item.uiSchema);
-    if (uiSchema["ui:order"])
-      addOrder(item.jsonSchema.id)
+    addUiSchema(item.uiSchema );
+    addOrder(item.jsonSchema.id)
   }
 
   const updateUi = items => {

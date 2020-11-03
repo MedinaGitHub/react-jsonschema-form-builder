@@ -46,11 +46,11 @@ export const handleSubmitModalNewField = (formData, prefix) => {
   }
 
   switch (formData.fieldType) {
-    case "input":
+    case "Input":
       newProp.jsonSchema.type = "string";
       break;
 
-    case "Selector":
+    case "Select":
       newProp.jsonSchema.type = "string";
       newProp.jsonSchema.enum = formData.options;
       let beforeObject = newProp.uiSchema[formData.id];
@@ -75,9 +75,16 @@ export const handleSubmitModalNewField = (formData, prefix) => {
       };
       break;
 
-    case "Archivo":
+    case "File":
       newProp.jsonSchema.type = "string";
       newProp.jsonSchema.format = "data-url";
+      newProp.uiSchema[formData.id] = { ...newProp.uiSchema[formData.id],
+        ...{
+          "ui:options": {
+            "accept": formData.enableFiles
+          }
+        }
+      };
       break;
 
     case "Date":

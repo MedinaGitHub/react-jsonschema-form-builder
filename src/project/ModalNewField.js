@@ -42,7 +42,7 @@ export const handleSubmitModalNewField = (formData, prefix) => {
     if (formData.required) {
         newProp.jsonSchema.isRequired = formData.required;
     }
-    debugger;
+    
     switch (formData.fieldType) {
         case "Input":
             newProp.jsonSchema.type = "string";

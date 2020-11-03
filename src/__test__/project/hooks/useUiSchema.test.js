@@ -57,8 +57,13 @@ describe('useUiSchema', () => {
             )
         })
 
-        expect(result.current.uiSchema).toEqual(
-            { 'ui:order': ['formulario_country_id', '*'] }
+        expect(result.current.uiSchema).toEqual({
+            "formulario_country_id": {
+                "ui:help": "Select your country",
+                "ui:widget": "select",
+            },
+            'ui:order': ['formulario_country_id', '*']
+        }
         )
     })
 
