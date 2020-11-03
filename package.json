@@ -1,6 +1,6 @@
 {
   "name": "react-jsonschema-form-builder",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "it's a visual builder of 'Json Schema' that export the 'Json Schema' generated for then paste this structure of schema in your react-jsonschema-form component",
   "private": false,
   "author": "Sebastian Medina",
@@ -31,8 +31,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@rjsf/core": "^2.3.0",
-    "@rjsf/material-ui": "^2.3.0",
+    "@rjsf/core": "^2.4.0",
+    "@rjsf/material-ui": "^2.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
