@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './project/App';
+import newFields from './project/schemasJson/newFields.json';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -8,6 +9,7 @@ ReactDOM.render(
     <App
       getJsonSchemaForm={(item) => { console.log('el response', item) }}
       rootSchemaUi={{}}
+      newFields={newFields}
       prefix={'formulario_'} />
   </React.StrictMode>,
   document.getElementById('root')

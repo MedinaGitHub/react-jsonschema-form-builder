@@ -25,8 +25,8 @@ export const cleanTextToEnableId = (function () {
 
 })();
 
-export const handleSubmitModalNewField = (formData, prefix) => {
-    const newProp = { jsonSchema: {}, uiSchema: {} };
+export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) => {
+    let newProp = { jsonSchema: {}, uiSchema: {} };
 
     newProp.jsonSchema.title = formData.title;
 
@@ -42,7 +42,8 @@ export const handleSubmitModalNewField = (formData, prefix) => {
     if (formData.required) {
         newProp.jsonSchema.isRequired = formData.required;
     }
-    
+
+    console.log('formData.fieldType', formData.fieldType)
     switch (formData.fieldType) {
         case "Input":
             newProp.jsonSchema.type = "string";
@@ -64,28 +65,28 @@ export const handleSubmitModalNewField = (formData, prefix) => {
         case "File":
             newProp.jsonSchema.type = "string";
             newProp.jsonSchema.format = "data-url";
-            newProp.uiSchema[formData.id] = { ...newProp.uiSchema[formData.id], ...{ "ui:options": {"accept":  formData.enableFiles } } }
+            newProp.uiSchema[formData.id] = { ...newProp.uiSchema[formData.id], ...{ "ui:options": { "accept": formData.enableFiles } } }
             break;
         case "Date":
             newProp.jsonSchema.type = "string";
             newProp.jsonSchema.format = "date";
             break;
-
         default:
+            newProp = newPropJsonSchema(newProp,formData, prefix);
             break;
     }
 
     if (formData.sections) {
         newProp.jsonSchema.sections = formData.sections;
     }
-
+    console.log("newProp", newProp)
     return newProp
 }
 
-export default function ModalNewField({ formBuilder, addItemForm, prefix = "" }) {
+export default function ModalNewField({ formBuilder, addItemForm, prefix = "", newPropJsonSchema }) {
 
     const onSubmit = ({ formData }, e) => {
-        const newProp = handleSubmitModalNewField(formData, prefix)
+        const newProp = handleSubmitModalNewField(formData, prefix, newPropJsonSchema)
         addItemForm(newProp)
     };
 
@@ -93,7 +94,7 @@ export default function ModalNewField({ formBuilder, addItemForm, prefix = "" })
         <WrapperModal txtBtn={<AddRoundedIcon />} txtTitle="" >
             <Form schema={formBuilder} onSubmit={onSubmit} >
                 <div>
-                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon/> </button>
+                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon /> </button>
                 </div>
             </Form>
 

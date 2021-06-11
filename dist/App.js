@@ -10,7 +10,7 @@ import { Grid, Button } from '@material-ui/core';
 import { useJsonSchema } from './hooks/useJsonSchema';
 import { useUiSchema } from './hooks/useUiSchema';
 import { useFields } from './hooks/useFields';
-import newFields from './schemasJson/newFields.json';
+import defaultNewField from './schemasJson/newFields.json';
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +29,9 @@ function App({
   rootSchema,
   rootSchemaUi,
   prefix,
-  customWidgets = {}
+  customWidgets = {},
+  newFields = defaultNewField,
+  newPropJsonSchema = () => {}
 }) {
   const classes = useStyles();
   const {
@@ -92,6 +94,7 @@ function App({
   }, /*#__PURE__*/React.createElement(Paper, {
     className: classes.paper
   }, /*#__PURE__*/React.createElement(ModalNewField, {
+    newPropJsonSchema: newPropJsonSchema,
     formBuilder: formFields,
     addItemForm: addItemForm,
     prefix: prefix

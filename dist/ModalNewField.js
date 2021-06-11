@@ -21,8 +21,8 @@ export const cleanTextToEnableId = function () {
     return ret.join('');
   };
 }();
-export const handleSubmitModalNewField = (formData, prefix) => {
-  const newProp = {
+export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) => {
+  let newProp = {
     jsonSchema: {},
     uiSchema: {}
   };
@@ -44,6 +44,8 @@ export const handleSubmitModalNewField = (formData, prefix) => {
   if (formData.required) {
     newProp.jsonSchema.isRequired = formData.required;
   }
+
+  console.log('formData.fieldType', formData.fieldType);
 
   switch (formData.fieldType) {
     case "Input":
@@ -93,6 +95,7 @@ export const handleSubmitModalNewField = (formData, prefix) => {
       break;
 
     default:
+      newProp = newPropJsonSchema(newProp, formData, prefix);
       break;
   }
 
@@ -100,17 +103,19 @@ export const handleSubmitModalNewField = (formData, prefix) => {
     newProp.jsonSchema.sections = formData.sections;
   }
 
+  console.log("newProp", newProp);
   return newProp;
 };
 export default function ModalNewField({
   formBuilder,
   addItemForm,
-  prefix = ""
+  prefix = "",
+  newPropJsonSchema
 }) {
   const onSubmit = ({
     formData
   }, e) => {
-    const newProp = handleSubmitModalNewField(formData, prefix);
+    const newProp = handleSubmitModalNewField(formData, prefix, newPropJsonSchema);
     addItemForm(newProp);
   };
 

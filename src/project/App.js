@@ -10,7 +10,7 @@ import { Grid, Button } from '@material-ui/core';
 import { useJsonSchema } from './hooks/useJsonSchema'
 import { useUiSchema } from './hooks/useUiSchema'
 import { useFields } from './hooks/useFields'
-import newFields from './schemasJson/newFields.json';
+import defaultNewField from './schemasJson/newFields.json';
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,13 +24,19 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix, customWidgets = {} }) {
-
+function App(
+  { getJsonSchemaForm,
+    rootSchema,
+    rootSchemaUi,
+    prefix,
+    customWidgets = {},
+    newFields = defaultNewField,
+    newPropJsonSchema = () => { }
+  }) {
   const classes = useStyles();
   const { jsonSchema, addJsonSchema, deleteSchemas, analizeFieldsObjects } = useJsonSchema(rootSchema);
   const { uiSchema, addUiSchema, updateUiSchema, addOrder } = useUiSchema(rootSchemaUi);
   const { formFields, analizeChangeStructureModalFields } = useFields(newFields);
-
 
   const widgets = {
     ...customWidgets
@@ -50,7 +56,7 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix, customWidget
     addJsonSchema(item.jsonSchema)
     let result = analizeFieldsObjects();
     analizeChangeStructureModalFields(result)
-    addUiSchema(item.uiSchema );
+    addUiSchema(item.uiSchema);
     addOrder(item.jsonSchema.id)
   }
 
@@ -66,10 +72,10 @@ function App({ getJsonSchemaForm, rootSchema, rootSchemaUi, prefix, customWidget
         alignItems="center" spacing={3}>
         <Grid item xs={5}  >
           <Paper className={classes.paper}>
-            <ModalNewField formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
+            <ModalNewField newPropJsonSchema={newPropJsonSchema} formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
             <ModalNewSection addItemForm={addItemForm} prefix={prefix} />
             <ModalSetOrder jsonSchema={jsonSchema} uiSchema={uiSchema} updateUi={updateUi} />
-            <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> <SaveRoundedIcon/>  </Button >
+            <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> <SaveRoundedIcon />  </Button >
           </Paper>
         </Grid>
       </Grid>
