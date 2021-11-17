@@ -83,7 +83,7 @@ export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) =
     return newProp
 }
 
-export default function ModalNewField({ formBuilder, addItemForm, prefix = "", newPropJsonSchema }) {
+export default function ModalNewField({ formBuilder, addItemForm, prefix = "", newPropJsonSchema, modalSchemaUi = {} }) {
 
     const onSubmit = ({ formData }, e) => {
         const newProp = handleSubmitModalNewField(formData, prefix, newPropJsonSchema)
@@ -92,7 +92,7 @@ export default function ModalNewField({ formBuilder, addItemForm, prefix = "", n
 
     return (
         <WrapperModal txtBtn={<AddRoundedIcon />} txtTitle="" >
-            <Form schema={formBuilder} onSubmit={onSubmit} >
+            <Form uiSchema={modalSchemaUi} schema={formBuilder} onSubmit={onSubmit} >
                 <div>
                     <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon /> </button>
                 </div>

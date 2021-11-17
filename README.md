@@ -66,6 +66,7 @@ other properties
     //customWidgets => you can import some custom Widget
     //newFields=> You can edit the form of add a new field
     //newPropJsonSchema=> if you add a new item in a custom newFields.json, thi function recibe de //options of you new field, and you can join with a customWidgets
+    //modalSchemaUi => UiSchema for the open modal configuration
     <FormBuilderSchem
         getJsonSchemaForm={getJsonSchema}
         rootSchema={seed} 
@@ -74,6 +75,7 @@ other properties
         prefix={'prefix_befores_ides_inputs'} 
         newPropJsonSchema={(newProp,formData, prefix)=>{return newProp}}
         customWidgets={{CustomCheckbox, FileWidget, ...}}
+        modalSchemaUi={{}}
     />
 ```
 

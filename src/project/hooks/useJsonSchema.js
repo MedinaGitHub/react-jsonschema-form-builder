@@ -71,7 +71,7 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
         var enumNameKeys = []
         var enumKeys = []
         for (const item in jsonSchema.properties) {
-            if (jsonSchema.properties[item].properties || jsonSchema.properties[item].items) {
+            if (jsonSchema.properties[item].newSection) {
                 enumKeys.push(item)
                 enumNameKeys.push(jsonSchema.properties[item].title)
             }

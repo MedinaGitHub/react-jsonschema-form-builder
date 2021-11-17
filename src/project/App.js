@@ -30,6 +30,7 @@ function App(
     rootSchemaUi,
     prefix,
     customWidgets = {},
+    modalSchemaUi = {},
     newFields = defaultNewField,
     newPropJsonSchema = () => { }
   }) {
@@ -72,7 +73,7 @@ function App(
         alignItems="center" spacing={3}>
         <Grid item xs={5}  >
           <Paper className={classes.paper}>
-            <ModalNewField newPropJsonSchema={newPropJsonSchema} formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
+            <ModalNewField modalSchemaUi={modalSchemaUi} newPropJsonSchema={newPropJsonSchema} formBuilder={formFields} addItemForm={addItemForm} prefix={prefix} />
             <ModalNewSection addItemForm={addItemForm} prefix={prefix} />
             <ModalSetOrder jsonSchema={jsonSchema} uiSchema={uiSchema} updateUi={updateUi} />
             <Button onClick={() => getJsonSchemaForm({ jsonSchema, uiSchema })} variant="contained" color="primary"> <SaveRoundedIcon />  </Button >

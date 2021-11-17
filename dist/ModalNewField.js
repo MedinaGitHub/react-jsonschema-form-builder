@@ -110,7 +110,8 @@ export default function ModalNewField({
   formBuilder,
   addItemForm,
   prefix = "",
-  newPropJsonSchema
+  newPropJsonSchema,
+  modalSchemaUi = {}
 }) {
   const onSubmit = ({
     formData
@@ -123,6 +124,7 @@ export default function ModalNewField({
     txtBtn: /*#__PURE__*/React.createElement(AddRoundedIcon, null),
     txtTitle: ""
   }, /*#__PURE__*/React.createElement(Form, {
+    uiSchema: modalSchemaUi,
     schema: formBuilder,
     onSubmit: onSubmit
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {

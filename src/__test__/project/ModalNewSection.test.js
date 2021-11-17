@@ -15,6 +15,7 @@ describe('ModalNewSection', () => {
                 jsonSchema: {
                     description:'insert users',
                     id: "formulario_users_id",
+                    newSection: true,
                     title: "users",
                     type: "object",
                     properties: {}
@@ -36,6 +37,7 @@ describe('ModalNewSection', () => {
             {
                 jsonSchema: {
                     id: "just_users",
+                    newSection: true,
                     title: "users",
                     type: "object",
                     properties: {}
@@ -57,6 +59,7 @@ describe('ModalNewSection', () => {
                 jsonSchema: {
                     id: "formulario_users_id",
                     title: "users",
+                    newSection: true,
                     type: "array",
                     items: {}
                 },

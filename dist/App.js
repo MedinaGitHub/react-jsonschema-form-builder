@@ -30,6 +30,7 @@ function App({
   rootSchemaUi,
   prefix,
   customWidgets = {},
+  modalSchemaUi = {},
   newFields = defaultNewField,
   newPropJsonSchema = () => {}
 }) {
@@ -94,6 +95,7 @@ function App({
   }, /*#__PURE__*/React.createElement(Paper, {
     className: classes.paper
   }, /*#__PURE__*/React.createElement(ModalNewField, {
+    modalSchemaUi: modalSchemaUi,
     newPropJsonSchema: newPropJsonSchema,
     formBuilder: formFields,
     addItemForm: addItemForm,

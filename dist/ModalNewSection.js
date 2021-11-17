@@ -10,7 +10,10 @@ export const handleSubmitModalNewSection = (formData, prefix = '') => {
     jsonSchema: {}
   };
   newProp.jsonSchema.title = formData.title;
-  newProp.jsonSchema.description = formData.description;
+
+  if (formData.description) {
+    newProp.jsonSchema.description = formData.description;
+  }
 
   if (formData.automatic_id === true) {
     formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
@@ -27,6 +30,7 @@ export const handleSubmitModalNewSection = (formData, prefix = '') => {
     newProp.jsonSchema.properties = {};
   }
 
+  newProp.jsonSchema.newSection = true;
   return newProp;
 };
 export default function ModalNewSection({

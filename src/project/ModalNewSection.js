@@ -10,7 +10,9 @@ export const handleSubmitModalNewSection = (formData, prefix = '') => {
     const newProp = { jsonSchema: {} };
 
     newProp.jsonSchema.title = formData.title;
-    newProp.jsonSchema.description = formData.description;
+    if (formData.description) {
+        newProp.jsonSchema.description = formData.description;
+    }
 
     if (formData.automatic_id === true) {
         formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
@@ -27,6 +29,7 @@ export const handleSubmitModalNewSection = (formData, prefix = '') => {
         newProp.jsonSchema.properties = {
         }
     }
+    newProp.jsonSchema.newSection = true;
     return newProp
 }
 
@@ -37,10 +40,10 @@ export default function ModalNewSection({ addItemForm, prefix }) {
     };
 
     return (
-        <WrapperModal txtBtn={<PlaylistAddRoundedIcon/>} txtTitle="" >
+        <WrapperModal txtBtn={<PlaylistAddRoundedIcon />} txtTitle="" >
             <Form schema={newSection} onSubmit={onSubmit} >
                 <div>
-                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon/> </button>
+                    <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary" type="submit"> <SendIcon /> </button>
                 </div>
             </Form>
         </WrapperModal>
