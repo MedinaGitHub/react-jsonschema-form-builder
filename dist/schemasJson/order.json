@@ -1,8 +1,0 @@
-{
-    "type": "array",
-      "description": " ",
-      "items": {
-        "type": "string"
-      },
-      "title":"Cambiar el orden o eliminar un campo"
-}

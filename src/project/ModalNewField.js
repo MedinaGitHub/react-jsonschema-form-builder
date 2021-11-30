@@ -20,7 +20,7 @@ export const cleanTextToEnableId = (function () {
             else
                 ret.push(c);
         }
-        return ret.join('').replaceAll(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-]/g, '');
+        return ret.join('').replace(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-]/g, '');
     }
 
 })();
