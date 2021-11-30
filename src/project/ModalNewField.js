@@ -20,7 +20,7 @@ export const cleanTextToEnableId = (function () {
             else
                 ret.push(c);
         }
-        return ret.join('');
+        return ret.join('').replaceAll(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-]/g, '');
     }
 
 })();
@@ -29,9 +29,10 @@ export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) =
     let newProp = { jsonSchema: {}, uiSchema: {} };
 
     newProp.jsonSchema.title = formData.title;
-
     if (formData.check_id === true) {
         formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
+        formData.id = cleanTextToEnableId(formData.id)
+    }else{
         formData.id = cleanTextToEnableId(formData.id)
     }
     newProp.jsonSchema.id = formData.id

@@ -18,7 +18,7 @@ export const cleanTextToEnableId = function () {
       if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);else ret.push(c);
     }
 
-    return ret.join('');
+    return ret.join('').replaceAll(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-]/g, '');
   };
 }();
 export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) => {
@@ -30,6 +30,8 @@ export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) =
 
   if (formData.check_id === true) {
     formData.id = prefix + formData.title.toLowerCase().replace(/ /g, "_") + '_id';
+    formData.id = cleanTextToEnableId(formData.id);
+  } else {
     formData.id = cleanTextToEnableId(formData.id);
   }
 
