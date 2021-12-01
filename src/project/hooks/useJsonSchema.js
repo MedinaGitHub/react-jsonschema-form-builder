@@ -4,7 +4,7 @@ import defaultSeed from "../schemasJson/rootSchema.json";
 export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed))) => {
     const [jsonSchema, setJsonSchema] = useState(rootSchema);
     const addJsonSchema = (item) => {
-        var newJsonSchema = { ...jsonSchema };
+        const newJsonSchema = { ...jsonSchema };
 
         if (item.sections && item.sections !== "root") {
             if (newJsonSchema.properties[item.sections].items) { //array
@@ -20,7 +20,7 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
                     if (!newJsonSchema.definitions[item.sections].required) {
                         newJsonSchema.definitions[item.sections].required = []
                     }
-                    newJsonSchema.definitions[item.sections].required.push(item.id)
+                    newJsonSchema.definitions[item.sections].required = [...new Set([...newJsonSchema.definitions[item.sections].required, item.id])]
                 }
             } else {//object
                 newJsonSchema.properties[item.sections].properties[item.id] = item
@@ -29,7 +29,7 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
                     if (!newJsonSchema.properties[item.sections].required) {
                         newJsonSchema.properties[item.sections].required = []
                     }
-                    newJsonSchema.properties[item.sections].required.push(item.id)
+                    newJsonSchema.properties[item.sections].required= [...new Set([...newJsonSchema.properties[item.sections].required, item.id])]
                 }
             }
         } else {
@@ -38,7 +38,7 @@ export const useJsonSchema = (rootSchema = JSON.parse(JSON.stringify(defaultSeed
                 if (!newJsonSchema.required) {
                     newJsonSchema.required = []
                 }
-                newJsonSchema.required.push(item.id)
+                newJsonSchema.required = [...new Set([...newJsonSchema.required, item.id])]
             }
         }
         setJsonSchema(newJsonSchema);
