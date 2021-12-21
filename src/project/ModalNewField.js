@@ -44,7 +44,10 @@ export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) =
         newProp.jsonSchema.isRequired = formData.required;
     }
 
-    console.log('formData.fieldType', formData.fieldType)
+    if (formData?.placeholder) {
+        newProp.uiSchema[formData.id] = { ...newProp.uiSchema[formData.id], "ui:placeholder": formData.placeholder }
+    }
+
     switch (formData.fieldType) {
         case "Input":
             newProp.jsonSchema.type = "string";
@@ -80,7 +83,6 @@ export const handleSubmitModalNewField = (formData, prefix, newPropJsonSchema) =
     if (formData.sections) {
         newProp.jsonSchema.sections = formData.sections;
     }
-    console.log("newProp", newProp)
     return newProp
 }
 
